@@ -67,7 +67,7 @@ function updateClubSheets() {
   const { clubData, lionsFeedData } = processClubData(playerData, foodData);
 
   createLionsFeedSheet(lionsFeedData);
-  const infoPacksFolder = getInfoPacksFolder();
+  const infoPacksFolder = FOLDERS.INFO_PACKS;
   deleteAllSheetsInFolder(infoPacksFolder);
   Object.keys(clubData).forEach(clubName => {
     const spreadsheet = getOrCreateClubSpreadsheet(clubName);
