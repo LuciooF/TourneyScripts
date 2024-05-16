@@ -55,5 +55,6 @@ const HEADERS = Object.freeze({
     MASTER_SHEET: [
         "Order Number", "Order Date", "Name", "Email", "Phone Number",
         "SKU", "Ticket Name", "Club", "Paid", "Refunded", "Remaining (Calc)"
-    ]
+    ],
+    LIONS_FEED: ["Name", "Club", "Food Choices", "Dietary Requirements"]
 });
