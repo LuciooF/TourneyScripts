@@ -1,3 +1,10 @@
+/**
+ * Creates and populates a Google Sheet with lions' feed data.
+ * The sheet is cleared, headers are appended, and the data is sorted and appended.
+ * Finally, a total count of the data rows is appended to a specific cell.
+ *
+ * @param {Array} lionsFeedData - The data to be added to the sheet. It's an array of arrays, where each sub-array represents a row of data.
+ */
 function createLionsFeedSheet(lionsFeedData) {
   const sheet = SHEETS.LIONS_FEED;
   sheet.clear();

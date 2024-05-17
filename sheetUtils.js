@@ -1,3 +1,10 @@
+/**
+ * Gets or creates a sheet by name in a given spreadsheet.
+ * @param {Object} spreadsheet - The spreadsheet to search in.
+ * @param {string} sheetName - The name of the sheet.
+ * @param {Array} headers - The headers to append if a new sheet is created.
+ * @returns {Object} The sheet.
+ */
 function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
   let sheet = spreadsheet.getSheetByName(sheetName);
   if (!sheet) {
@@ -14,7 +21,13 @@ function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
   }
   return sheet;
 }
-
+/**
+ * Gets a sheet by name in a given spreadsheet.
+ * @param {Object} spreadsheet - The spreadsheet to search in.
+ * @param {string} sheetName - The name of the sheet.
+ * @returns {Object} The sheet.
+ * @throws {Error} If no sheet is found with the given name.
+ */
 function getSheetByName(spreadsheet, sheetName) {
   let sheet = spreadsheet.getSheetByName(sheetName);
   if (!sheet) {
@@ -22,16 +35,22 @@ function getSheetByName(spreadsheet, sheetName) {
   }
   return sheet;
 }
-// Helper function to append row and set styles
+/**
+ * Appends a row to a sheet and sets the background color based on the row index.
+ * @param {Object} sheet - The sheet to append to.
+ * @param {Array} row - The row to append.
+ * @param {number} index - The index of the row.
+ */
 function appendRowWithStyles(sheet, row, index) {
   sheet.appendRow(row);
   let lastRow = sheet.getLastRow();
   let backgroundColor = (index % 2 === 0) ? COLOR.WHITE: COLOR.GREY;
   sheet.getRange(lastRow, 1, 1, row.length).setBackground(backgroundColor);
 }
-
-
-
+/**
+ * Clears the content of a sheet starting from a specific row.
+ * @param {Object} sheet - The sheet to clear.
+ */
 function clearSheetContent(sheet) {
   const startRow = 6;
   const lastRow = sheet.getLastRow();
@@ -44,6 +63,14 @@ function clearSheetContent(sheet) {
     console.warn('No content to clear.');
   }
 }
+/**
+ * Appends a value to a cell in a sheet and sets the font size and weight.
+ * @param {Object} sheet - The sheet to append to.
+ * @param {*} value - The value to append.
+ * @param {string} cell - The cell to append to.
+ * @param {number} fontSize - The font size to set.
+ * @param {boolean} isBold - Whether the font weight should be bold.
+ */
 function appendValueToCell(sheet, value, cell, fontSize, isBold) {
   const cellRange = sheet.getRange(cell);
   cellRange.clearContent();
@@ -57,11 +84,19 @@ function appendValueToCell(sheet, value, cell, fontSize, isBold) {
     cellRange.setFontWeight("normal");
   }
 }
-// Helper functions to normalize order numbers and format rows
+/**
+ * Normalizes an order number by removing non-digit characters from the start.
+ * @param {string} orderNumber - The order number to normalize.
+ * @returns {string} The normalized order number.
+ */
 function normalizeOrderNumber(orderNumber) {
   return String(orderNumber).replace(/^[^\d]+/, '');
 }
-  // Extracts necessary values from a CSV row based on specific indices
+/**
+ * Extracts necessary values from a CSV row based on specific indices.
+ * @param {Array} csvRow - The CSV row to extract values from.
+ * @returns {Array} An array of extracted values.
+ */
 function extractCsvValues(csvRow) {
   return [
     String(csvRow[0]).replace(/^[^\d]+/, ''), // Order Number, normalized

@@ -1,5 +1,9 @@
-
-// Appends data to the "Player Details" sheet within another spreadsheet
+/**
+ * Appends data to the "Player Details" sheet within a given spreadsheet.
+ * @param {Object} spreadsheet - The spreadsheet to append data to.
+ * @param {Array} dataRows - The data to append.
+ * @param {Array} headers - The headers for the data.
+ */
 function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
   const sheet = getSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
   clearSheetContent(sheet);  // Clear existing content but keep formatting
@@ -16,26 +20,43 @@ function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
     console.error('Invalid data format:', dataRows);
   }
 }
-// Fetches data from player and food form sheets
+/**
+ * Fetches data from player and food form sheets.
+ * @returns {Object} An object containing arrays of player and food data.
+ */
 function fetchDataFromSheets() {
   const playerData = SHEETS.PLAYER_MASTER.getDataRange().getValues();
   const foodData = SHEETS.FOOD_FORM.getDataRange().getValues();
   return { playerData, foodData };
 }
 
-// Processes data into structured club data and lions feed data
+/**
+ * Processes player and food data into structured club data and lions feed data.
+ * @param {Array} playerData - The data about players.
+ * @param {Array} foodData - The data about food.
+ * @returns {Object} An object containing club data and lions feed data.
+ */
 function processClubData(playerData, foodData) {
   const foodMap = mapFoodData(foodData);
   const { clubData, lionsFeedData } = compileClubData(playerData, foodMap);
   return { clubData, lionsFeedData };
 }
-// Maps food form data
+/**
+ * Maps food form data into a Map object.
+ * @param {Array} foodData - The data about food.
+ * @returns {Map} A Map where each key-value pair represents a row of food data.
+ */
 function mapFoodData(foodData) {
   const foodMap = new Map();
   foodData.slice(1).forEach(row => foodMap.set(row[0], row.slice(2)));  // Skip header
   return foodMap;
 }
-//compiles club data and also lions feed data as it makes sense to do at same time for computational reasons
+/**
+ * Compiles club data and lions feed data.
+ * @param {Array} playerData - The data about players.
+ * @param {Map} foodMap - A Map of food data.
+ * @returns {Object} An object containing club data and lions feed data.
+ */
 function compileClubData(playerData, foodMap) {
   const clubData = {};
   const lionsFeedData = [];
@@ -52,8 +73,12 @@ function compileClubData(playerData, foodMap) {
   return { clubData, lionsFeedData };
 }
 
-
-// Constructs a single row of club data
+/**
+ * Constructs a single row of club data.
+ * @param {Array} playerRow - A row of player data.
+ * @param {Array} foodRow - A row of food data.
+ * @returns {Array} An array representing a row of club data.
+ */
 function constructRowData(playerRow, foodRow) {
   return [
     playerRow[0], playerRow[1], playerRow[2], playerRow[5],
@@ -62,7 +87,11 @@ function constructRowData(playerRow, foodRow) {
   ];
 }
 
-// Updates all club sheets with the compiled data
+/**
+ * Updates all club sheets with the compiled data.
+ * Fetches data from sheets, processes it, and appends it to the club sheets.
+ * Also updates the Lions Feed sheet with the compiled data. (It made sense to do it here as we are reusing the data)
+ */
 function updateClubSheets() {
   const { playerData, foodData } = fetchDataFromSheets();
   const { clubData, lionsFeedData } = processClubData(playerData, foodData);
