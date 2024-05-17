@@ -5,7 +5,7 @@
 
 - [x] Try out eslint
 - [x] Remove eslint (I hate it. I hate the fact that I thought it would be better)
-- [ ] Create constants for colours
+- [ ] [Create constants for colours](https://github.com/LuciooF/Tourney2024Scripts/issues/1)
 - [ ] Figure out clearing the players sheet for each club (Only have to clear from row 6 and only clear text)
 - [ ] Fix bug in lions feed sheet
 - [ ] Investigate and think about how to deal with food requirements
