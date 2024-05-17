@@ -6,7 +6,7 @@ function updateStatus(currentStep, message, isError = false) {
 
   // Setup headers if not already set
   if (progressSheet.getRange('A1').getValue() === '') {
-    progressSheet.getRange('A1:D1').merge().setValue('Progress Updates').setBackground('#455a64').setFontColor('#ffffff').setFontSize(16).setFontWeight('bold');
+    progressSheet.getRange('A1:D1').merge().setValue('Progress Updates').setBackground(COLOLR.BLUE_GREY).setFontColor(COLOR.GREY).setFontSize(16).setFontWeight('bold');
     progressSheet.setColumnWidths(1, 4, 200);
     progressSheet.setFrozenRows(1);
   }
@@ -34,25 +34,25 @@ function updateStatus(currentStep, message, isError = false) {
     let cellRange = progressSheet.getRange(rowNumber, 1, 1, 4);
     cellRange.merge();
     let existingValue = cellRange.getValue();
-    let backgroundColor = '#ffffff'; // Default background for pending steps
-    let fontColor = '#000000';
+    let backgroundColor = COLOR.WHITE; // Default background for pending steps
+    let fontColor = COLOR.black;
     let statusMessage = `${stepName}: Pending...`;
 
     if (stepName === currentStep) {
       statusMessage = `${stepName}: In Process - ${message}`;
-      backgroundColor = '#388e3c'; // Dark green for current step
-      fontColor = '#ffffff'; // White text for readability
+      backgroundColor = COLOR.DARK_GREEN;
+      fontColor = COLOR.WHITE; 
       previousStepDone = false;
       allPreviousCompleted = false;
     } else if (existingValue.includes("In Process") && previousStepDone) {
       statusMessage = `${stepName}: Done`;
-      backgroundColor = '#c8e6c9'; // Light green for completed steps
+      backgroundColor = COLOR.LIGHT_GREEN;
     } else if (existingValue.includes("Pending") && !previousStepDone) {
       statusMessage = existingValue;
       allPreviousCompleted = false;
     } else if (existingValue.includes("Done") || existingValue.includes("Error")) {
       statusMessage = existingValue;
-      backgroundColor = existingValue.includes("Done") ? '#c8e6c9' : '#ffab91';
+      backgroundColor = existingValue.includes("Done") ? COLOR.LIGHT_GREEN : COLOR.SALMON;
       if (existingValue.includes("Error")) {
         allPreviousCompleted = false;
       }
@@ -61,8 +61,8 @@ function updateStatus(currentStep, message, isError = false) {
     // Check if it's the final step
     if (stepName === "Update Complete" && allPreviousCompleted) {
       statusMessage = `${stepName}: Done`;
-      backgroundColor = '#c8e6c9'; // Light green for completed steps
-      fontColor = '#000000';
+      backgroundColor = COLOR.LIGHT_GREEN;// Light green for completed steps
+      fontColor = COLOR.BLACK;
     }
 
     cellRange.setValue(statusMessage);
@@ -82,7 +82,7 @@ function clearProgressSheet() {
 function logError(err){
   var sheet = SpreadsheetApp.getActive().getSheetByName("Progress");
   const summaryRange = sheet.getRange(sheet.getLastRow() + 1, 1, 1, 8);
-  summaryRange.setValue(`The following error occured `+ err).setFontWeight("bold").setFontSize(14).setFontColor("red").mergeAcross();
+  summaryRange.setValue(`The following error occured `+ err).setFontWeight("bold").setFontSize(14).setFontColor(COLOR.RED).mergeAcross();
 }
 
 function appendErrorRow(errorsSheet, row, backgroundColor) {

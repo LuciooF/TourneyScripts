@@ -60,3 +60,15 @@ const HEADERS = Object.freeze({
     LIONS_FEED: ["Name", "Club", "Food Choices", "Dietary Requirements"],
     PLAYER_INFORMATION: ["Order Number", "Order Date", "Name", "Ticket Name", "Paid", "Refunded", "Remaining", "Food Selected Y/N", "Lunch Y/N", "Food to be Paid", "Food Choices", "Dietary Requirements"]
 });
+
+const COLOR = Object.freeze({
+    WHITE: "#ffffff",
+    GREY: "#f0f0f0",
+    BLUE_GREY: "#455a64",
+    DARK_GREEN: "#388e3c",
+    LIGHT_GREEN: "#c8e6c9",
+    BLACK:'#000000',
+    SALMON: 'ffab91',
+    RED: '#ff0000',
+    LAVENDER: '#CBC3E3'
+});

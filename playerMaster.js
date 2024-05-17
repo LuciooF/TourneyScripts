@@ -90,8 +90,7 @@ function doEverything() {
   function writeDataToMasterSheet(masterSheet, dataToWrite) {
     dataToWrite.sort((a, b) => a[7].localeCompare(b[7]));
     dataToWrite.forEach((row, index) => {
-      masterSheet.appendRow(row);
-      formatRowBackground(masterSheet, row, index);
+      appendRowWithStyles(masterSheet, row, index);
     });
   }
   
@@ -104,7 +103,7 @@ function doEverything() {
     var cell = errorsSheet.getRange(rowNumber, 1, 1, 11);
   
     // Set the background color to purple and make the text bold for the first 11 columns
-    cell.setBackground("#CBC3E3").setFontWeight("bold").setFontSize(14);
+    cell.setBackground(COLOR.LAVENDER).setFontWeight("bold").setFontSize(14);
     errorRows.forEach(row => appendErrorRow(errorsSheet, row, "lightblue"));
   }
   
@@ -127,11 +126,4 @@ function doEverything() {
         appendErrorRow(errorsSheet, rowData, 'pink');
       }
     });
-  }
- 
-  //makes one row grey after a white one
-  function formatRowBackground(sheet, row, index) {
-    const lastRow = sheet.getLastRow();
-    const color = (index % 2 === 0) ? "#f0f0f0" : "#ffffff";
-    sheet.getRange(lastRow, 1, 1, row.length).setBackground(color);
   }

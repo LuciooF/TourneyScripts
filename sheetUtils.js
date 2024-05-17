@@ -18,7 +18,7 @@ function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
 function appendRowWithStyles(sheet, row, index) {
   sheet.appendRow(row);
   let lastRow = sheet.getLastRow();
-  let backgroundColor = (index % 2 === 0) ? "#f0f0f0" : "#ffffff";
+  let backgroundColor = (index % 2 === 0) ? COLOR.WHITE: COLOR.GREY;
   sheet.getRange(lastRow, 1, 1, row.length).setBackground(backgroundColor);
 }
 
