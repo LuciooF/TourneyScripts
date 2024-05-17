@@ -14,15 +14,33 @@ function getFolder(folderName, parentFolder = null) {
   }
 }
 
-// Retrieves or creates the spreadsheet for a given club name within the "Team Infos" folder
 function getOrCreateClubSpreadsheet(clubName) {
-  const folder = FOLDERS.INFO_PACKS;
-  const templateSpreadsheet = SPREADSHEETS.TEMPLATE;
-  const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
-  const file = DriveApp.getFileById(newSpreadsheet.getId());
-  folder.addFile(file);
-  DriveApp.getRootFolder().removeFile(file);  // Remove from root folder
-  return newSpreadsheet;
+  try {
+    const folder = FOLDERS.INFO_PACKS;
+    const templateSpreadsheet = SPREADSHEETS.INFO_PACK_TEMPLATE;
+
+    console.log("Folder: " + folder);
+    console.log("Template Spreadsheet: " + templateSpreadsheet);
+
+    const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
+
+    console.log("New Spreadsheet ID: " + newSpreadsheet.getId());
+
+    const file = DriveApp.getFileById(newSpreadsheet.getId());
+
+    console.log("File: " + file);
+
+    folder.addFile(file);
+    console.log("File added to folder");
+
+    DriveApp.getRootFolder().removeFile(file);
+    console.log("File removed from root folder");
+
+    return newSpreadsheet;
+  } catch (error) {
+    console.error("Error in getOrCreateClubSpreadsheet: " + error);
+    throw error; // Re-throw the error after logging it
+  }
 }
 
 function getOrCreateSpreadsheet(spreadsheetName, folder) {
@@ -40,10 +58,22 @@ function getOrCreateSpreadsheet(spreadsheetName, folder) {
 }
 
 // Duplicates the template spreadsheet and renames it
-function duplicateTemplateSpreadsheet(templateSpreadsheet, newName) {
-  const templateFile = DriveApp.getFileById(templateSpreadsheet.getId());
-  const newFile = templateFile.makeCopy(newName);
-  return SpreadsheetApp.openById(newFile.getId());
+function duplicateTemplateSpreadsheet(templateSpreadsheet, clubName) {
+  try {
+    // Get the template file by ID
+    const templateFile = DriveApp.getFileById(templateSpreadsheet.getId());
+
+    // Make a copy of the template with the new name
+    const newFile = templateFile.makeCopy(clubName);
+
+    // Open the new file as a Spreadsheet
+    const newSpreadsheet = SpreadsheetApp.openById(newFile.getId());
+
+    return newSpreadsheet;
+  } catch (error) {
+    console.error("Error in duplicateTemplateSpreadsheet: " + error);
+    throw error; // Re-throw the error after logging it
+  }
 }
 function deleteAllSheetsInFolder(folder) {
   // Get all files in the folder

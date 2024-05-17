@@ -72,7 +72,7 @@ function updateClubSheets() {
   deleteAllSheetsInFolder(infoPacksFolder);
   Object.keys(clubData).forEach(clubName => {
     const spreadsheet = getOrCreateClubSpreadsheet(clubName);
-    const headers = ["Order Number", "Order Date", "Name", "Ticket Name", "Paid", "Refunded", "Remaining", "Food Selected Y/N", "Lunch Y/N", "Food to be Paid", "Food Choices", "Dietary Requirements"];
+    const headers = HEADERS.PLAYER_INFORMATION;
     appendDataToPlayerDetailsSheet(spreadsheet, clubData[clubName], headers);
   });
 }

@@ -57,5 +57,6 @@ const HEADERS = Object.freeze({
         "Order Number", "Order Date", "Name", "Email", "Phone Number",
         "SKU", "Ticket Name", "Club", "Paid", "Refunded", "Remaining (Calc)"
     ],
-    LIONS_FEED: ["Name", "Club", "Food Choices", "Dietary Requirements"]
+    LIONS_FEED: ["Name", "Club", "Food Choices", "Dietary Requirements"],
+    PLAYER_INFORMATION: ["Order Number", "Order Date", "Name", "Ticket Name", "Paid", "Refunded", "Remaining", "Food Selected Y/N", "Lunch Y/N", "Food to be Paid", "Food Choices", "Dietary Requirements"]
 });

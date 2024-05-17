@@ -23,14 +23,18 @@ function appendRowWithStyles(sheet, row, index) {
 }
 
 
-
-// Helper function to clear sheet content but keep formatting
-function clearSheetContent(sheet, startRow = 6, startCol = 1, endCol = null) {
+//This clears from row 6, can probably make it dynamic but cba atm
+function clearSheetContent(sheet) {
+  const startRow = 6;
   const lastRow = sheet.getLastRow();
-  const lastCol = endCol || sheet.getLastColumn();
+  const lastCol = sheet.getLastColumn();
 
-  const range = sheet.getRange(startRow, startCol, lastRow - startRow + 1, lastCol - startCol + 1);
-  range.clearContent();  // Clear content only
+  if (lastRow >= startRow) {
+    const range = sheet.getRange(startRow, 1, lastRow - startRow + 1, lastCol);
+    range.clearContent();  // Clear content only
+  } else {
+    console.warn('No content to clear.');
+  }
 }
 
 
