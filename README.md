@@ -16,8 +16,8 @@
 - [x] [Write some documentation for the functions. Use AI for this, please.](https://github.com/LuciooF/Tourney2024Scripts/issues/7)
 - [ ] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
 - [x] Create issues for all of these so they're linked here
-- [] [Create buttons in sheet so separate parts of script can be individually executed.](https://github.com/LuciooF/Tourney2024Scripts/issues/12)
-- [] [Make userFeedback a lot less complicated code wise and "UI" wise.](https://github.com/LuciooF/Tourney2024Scripts/issues/11)
-- [] [Create a script so every new issue that appears on this GH repo is automatically added and linked here (And ticked when fixed)](https://github.com/LuciooF/Tourney2024Scripts/issues/10)
-- [] [Create proper classes or proper data sets for some of the current objects](https://github.com/LuciooF/Tourney2024Scripts/issues/9)
-- [] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8)
+- [ ] [Create buttons in sheet so separate parts of script can be individually executed.](https://github.com/LuciooF/Tourney2024Scripts/issues/12)
+- [ ] [Make userFeedback a lot less complicated code wise and "UI" wise.](https://github.com/LuciooF/Tourney2024Scripts/issues/11)
+- [ ] [Create a script so every new issue that appears on this GH repo is automatically added and linked here (And ticked when fixed)](https://github.com/LuciooF/Tourney2024Scripts/issues/10)
+- [ ] [Create proper classes or proper data sets for some of the current objects](https://github.com/LuciooF/Tourney2024Scripts/issues/9)
+- [ ] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8)
