@@ -1,7 +1,4 @@
-import * as Constants from './constants.js';
-/* global SpreadsheetApp, DriveApp */
-//This tells eslint not to be annoying about these. (As they're not within our scope)
-export function getFolder(folderName, parentFolder = null) {
+function getFolder(folderName, parentFolder = null) {
   let folders;
   
   if (parentFolder) {
@@ -18,13 +15,13 @@ export function getFolder(folderName, parentFolder = null) {
 }
 
 // Retrieves or creates the spreadsheet for a given club name within the "Team Infos" folder
-export function getOrCreateClubSpreadsheet(clubName) {
-  const folder = Constants.FOLDERS.INFO_PACKS;
+function getOrCreateClubSpreadsheet(clubName) {
+  const folder = FOLDERS.INFO_PACKS;
   const existingFiles = folder.getFilesByName(clubName);
   if (existingFiles.hasNext()) {
     return SpreadsheetApp.open(existingFiles.next());
   } else {
-    const templateSpreadsheet = Constants.SPREADSHEETS.TEMPLATE;
+    const templateSpreadsheet = SPREADSHEETS.TEMPLATE;
     const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
     const file = DriveApp.getFileById(newSpreadsheet.getId());
     folder.addFile(file);
@@ -33,7 +30,7 @@ export function getOrCreateClubSpreadsheet(clubName) {
   }
 }
 
-export function getOrCreateSpreadsheet(spreadsheetName, folder) {
+function getOrCreateSpreadsheet(spreadsheetName, folder) {
   const existingFiles = folder.getFilesByName(spreadsheetName);
   
   if (existingFiles.hasNext()) {
@@ -53,7 +50,7 @@ function duplicateTemplateSpreadsheet(templateSpreadsheet, newName) {
   const newFile = templateFile.makeCopy(newName);
   return SpreadsheetApp.openById(newFile.getId());
 }
-export function deleteAllSheetsInFolder(folder) {
+function deleteAllSheetsInFolder(folder) {
   // Get all files in the folder
   const files = folder.getFiles();
   
@@ -64,7 +61,7 @@ export function deleteAllSheetsInFolder(folder) {
   }
 }
 
-export function getSheet(spreadSheet, sheetName) {
+function getSheet(spreadSheet, sheetName) {
   const sheet = spreadSheet.getSheetByName(sheetName);
   
   if (sheet) {

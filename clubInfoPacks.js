@@ -1,10 +1,8 @@
-import * as Constants from './constants';
-import * as SheetUtils from './sheetUtils';
-import * as gDriveHelper from './gDriveHelper';
+
 // Appends data to the "Player Details" sheet within another spreadsheet
 function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
-  const sheet = SheetUtils.getOrCreateSheetByName(spreadsheet, Constants.SHEET_NAMES.PLAYER_DETAILS);
-  SheetUtils.clearSheetContent(sheet, 6);  // Clear existing content but keep formatting
+  const sheet = getOrCreateSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
+  clearSheetContent(sheet, 6);  // Clear existing content but keep formatting
 
   // Append headers at row 5, column B
   const startRow = 5;
@@ -20,8 +18,8 @@ function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
 }
 // Fetches data from player and food form sheets
 function fetchDataFromSheets() {
-  const playerData = Constants.SHEETS.PLAYER_MASTER.getDataRange().getValues();
-  const foodData = Constants.SHEETS.FOOD_FORM.getDataRange().getValues();
+  const playerData = SHEETS.PLAYER_MASTER.getDataRange().getValues();
+  const foodData = SHEETS.FOOD_FORM.getDataRange().getValues();
   return { playerData, foodData };
 }
 
@@ -65,15 +63,15 @@ function constructRowData(playerRow, foodRow) {
 }
 
 // Updates all club sheets with the compiled data
-export function updateClubSheets() {
+function updateClubSheets() {
   const { playerData, foodData } = fetchDataFromSheets();
   const { clubData, lionsFeedData } = processClubData(playerData, foodData);
 
-  SheetUtils.createLionsFeedSheet(lionsFeedData);
-  const infoPacksFolder = Constants.FOLDERS.INFO_PACKS;
-  SheetUtils.deleteAllSheetsInFolder(infoPacksFolder);
+  createLionsFeedSheet(lionsFeedData);
+  const infoPacksFolder = FOLDERS.INFO_PACKS;
+  deleteAllSheetsInFolder(infoPacksFolder);
   Object.keys(clubData).forEach(clubName => {
-    const spreadsheet = gDriveHelper.getOrCreateClubSpreadsheet(clubName);
+    const spreadsheet = getOrCreateClubSpreadsheet(clubName);
     const headers = ["Order Number", "Order Date", "Name", "Ticket Name", "Paid", "Refunded", "Remaining", "Food Selected Y/N", "Lunch Y/N", "Food to be Paid", "Food Choices", "Dietary Requirements"];
     appendDataToPlayerDetailsSheet(spreadsheet, clubData[clubName], headers);
   });
