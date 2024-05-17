@@ -44,10 +44,18 @@ function clearSheetContent(sheet) {
     console.warn('No content to clear.');
   }
 }
-// Appends a summary row to the given sheet
-function appendSummaryRow(sheet, totalCount) {
-  const summaryRange = sheet.getRange(sheet.getLastRow() + 1, 1, 1, 5);
-  summaryRange.setValue(`Total Count: ${totalCount}`).setFontWeight("bold").setFontSize(14).mergeAcross();
+function appendValueToCell(sheet, value, cell, fontSize, isBold) {
+  const cellRange = sheet.getRange(cell);
+  cellRange.clearContent();
+  cellRange.setValue(value);
+  if (fontSize) {
+    cellRange.setFontSize(fontSize);
+  }
+  if (isBold) {
+    cellRange.setFontWeight("bold");
+  } else {
+    cellRange.setFontWeight("normal");
+  }
 }
 // Helper functions to normalize order numbers and format rows
 function normalizeOrderNumber(orderNumber) {
