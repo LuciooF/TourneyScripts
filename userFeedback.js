@@ -6,7 +6,7 @@ function updateStatus(currentStep, message, isError = false) {
 
   // Setup headers if not already set
   if (progressSheet.getRange('A1').getValue() === '') {
-    progressSheet.getRange('A1:D1').merge().setValue('Progress Updates').setBackground(COLOLR.BLUE_GREY).setFontColor(COLOR.GREY).setFontSize(16).setFontWeight('bold');
+    progressSheet.getRange('A1:D1').merge().setValue('Progress Updates').setBackground(COLOR.BLUE_GREY).setFontColor(COLOR.GREY).setFontSize(16).setFontWeight('bold');
     progressSheet.setColumnWidths(1, 4, 200);
     progressSheet.setFrozenRows(1);
   }
