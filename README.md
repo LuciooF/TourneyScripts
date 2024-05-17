@@ -12,6 +12,7 @@
 - [ ] Create last spreadsheet (which is very similar to lions feed but for us)
 - [ ] Find the reference to the other spreadsheet we should create (Matt mentioned but I lost the sheet)
 - [x] Be cool
-- [] Actually write a readme so other people can understand
-- [] Write some documentation for the functions. Use AI for this, please.
-- [] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
+- [ ] Actually write a readme so other people can understand
+- [ ] Write some documentation for the functions. Use AI for this, please.
+- [ ] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
+- [ ] Create issues for all of these so they're linked here
