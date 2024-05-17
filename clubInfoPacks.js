@@ -1,11 +1,10 @@
 
 // Appends data to the "Player Details" sheet within another spreadsheet
 function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
-  const sheet = getOrCreateSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
-  //TODO: This for some reason clears everything, I dont get it. For me to look into eventually....
-  //clearSheetContent(sheet);  // Clear existing content but keep formatting
+  const sheet = getSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
+  clearSheetContent(sheet);  // Clear existing content but keep formatting
 
-  // Append headers at row 5, column B
+  //Append headers at row 5, column B
   const startRow = 5;
   const startColumn = 2;  // Column B
   sheet.getRange(startRow, startColumn, 1, headers.length).setValues([headers]);

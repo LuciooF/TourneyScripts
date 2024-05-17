@@ -14,6 +14,14 @@ function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
   }
   return sheet;
 }
+
+function getSheetByName(spreadsheet, sheetName) {
+  let sheet = spreadsheet.getSheetByName(sheetName);
+  if (!sheet) {
+    throw Error("No sheet found in spreadsheet " + spreadsheet.getName() + " with name " + sheetName);
+  }
+  return sheet;
+}
 // Helper function to append row and set styles
 function appendRowWithStyles(sheet, row, index) {
   sheet.appendRow(row);
@@ -23,48 +31,28 @@ function appendRowWithStyles(sheet, row, index) {
 }
 
 
-//This clears from row 6, can probably make it dynamic but cba
-// function clearSheetContent(sheet) {
-//   const startRow = 6;
-//   const lastRow = sheet.getLastRow();
-//   const lastCol = sheet.getLastColumn();
 
-//   if (lastRow >= startRow) {
-//     const range = sheet.getRange(startRow, 1, lastRow - startRow + 1, lastCol);
-//     range.clearContent();  // Clear content only
-//   } else {
-//     console.warn('No content to clear.');
-//   }
-// }
-// function clearSheetContent(sheet) {
-//   var range = sheet.getRange(6, 1, sheet.getMaxRows() - 5, sheet.getMaxColumns());
-//   var values = range.getValues();
-  
-//   for (var i = 0; i < values.length; i++) {
-//     for (var j = 0; j < values[i].length; j++) {
-//       if (typeof values[i][j] === 'string') {
-//         values[i][j] = '';
-//       }
-//     }
-//   }
-  
-//   range.setValues(values);
-// }
+function clearSheetContent(sheet) {
+  const startRow = 6;
+  const lastRow = sheet.getLastRow();
+  const lastCol = sheet.getLastColumn();
 
-
-
-
+  if (lastRow >= startRow) {
+    const range = sheet.getRange(startRow, 1, lastRow - startRow + 1, lastCol);
+    range.clearContent();  // Clear content only
+  } else {
+    console.warn('No content to clear.');
+  }
+}
 // Appends a summary row to the given sheet
 function appendSummaryRow(sheet, totalCount) {
   const summaryRange = sheet.getRange(sheet.getLastRow() + 1, 1, 1, 5);
   summaryRange.setValue(`Total Count: ${totalCount}`).setFontWeight("bold").setFontSize(14).mergeAcross();
 }
- 
-  // Helper functions to normalize order numbers and format rows
+// Helper functions to normalize order numbers and format rows
 function normalizeOrderNumber(orderNumber) {
   return String(orderNumber).replace(/^[^\d]+/, '');
 }
-
   // Extracts necessary values from a CSV row based on specific indices
 function extractCsvValues(csvRow) {
   return [
