@@ -17,17 +17,12 @@ function getFolder(folderName, parentFolder = null) {
 // Retrieves or creates the spreadsheet for a given club name within the "Team Infos" folder
 function getOrCreateClubSpreadsheet(clubName) {
   const folder = FOLDERS.INFO_PACKS;
-  const existingFiles = folder.getFilesByName(clubName);
-  if (existingFiles.hasNext()) {
-    return SpreadsheetApp.open(existingFiles.next());
-  } else {
-    const templateSpreadsheet = SPREADSHEETS.TEMPLATE;
-    const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
-    const file = DriveApp.getFileById(newSpreadsheet.getId());
-    folder.addFile(file);
-    DriveApp.getRootFolder().removeFile(file);  // Remove from root folder
-    return newSpreadsheet;
-  }
+  const templateSpreadsheet = SPREADSHEETS.TEMPLATE;
+  const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
+  const file = DriveApp.getFileById(newSpreadsheet.getId());
+  folder.addFile(file);
+  DriveApp.getRootFolder().removeFile(file);  // Remove from root folder
+  return newSpreadsheet;
 }
 
 function getOrCreateSpreadsheet(spreadsheetName, folder) {
