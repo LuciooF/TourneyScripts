@@ -1,4 +1,7 @@
-function getFolder(folderName, parentFolder = null) {
+import * as Constants from './constants.js';
+/* global SpreadsheetApp, DriveApp */
+//This tells eslint not to be annoying about these. (As they're not within our scope)
+export function getFolder(folderName, parentFolder = null) {
   let folders;
   
   if (parentFolder) {
@@ -15,13 +18,13 @@ function getFolder(folderName, parentFolder = null) {
 }
 
 // Retrieves or creates the spreadsheet for a given club name within the "Team Infos" folder
-function getOrCreateClubSpreadsheet(clubName) {
-  const folder = FOLDERS.INFO_PACKS;
+export function getOrCreateClubSpreadsheet(clubName) {
+  const folder = Constants.FOLDERS.INFO_PACKS;
   const existingFiles = folder.getFilesByName(clubName);
   if (existingFiles.hasNext()) {
     return SpreadsheetApp.open(existingFiles.next());
   } else {
-    const templateSpreadsheet = SPREADSHEETS.TEMPLATE;
+    const templateSpreadsheet = Constants.SPREADSHEETS.TEMPLATE;
     const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
     const file = DriveApp.getFileById(newSpreadsheet.getId());
     folder.addFile(file);
@@ -30,7 +33,7 @@ function getOrCreateClubSpreadsheet(clubName) {
   }
 }
 
-function getOrCreateSpreadsheet(spreadsheetName, folder) {
+export function getOrCreateSpreadsheet(spreadsheetName, folder) {
   const existingFiles = folder.getFilesByName(spreadsheetName);
   
   if (existingFiles.hasNext()) {
@@ -50,7 +53,7 @@ function duplicateTemplateSpreadsheet(templateSpreadsheet, newName) {
   const newFile = templateFile.makeCopy(newName);
   return SpreadsheetApp.openById(newFile.getId());
 }
-function deleteAllSheetsInFolder(folder) {
+export function deleteAllSheetsInFolder(folder) {
   // Get all files in the folder
   const files = folder.getFiles();
   
@@ -61,7 +64,7 @@ function deleteAllSheetsInFolder(folder) {
   }
 }
 
-function getSheet(spreadSheet, sheetName) {
+export function getSheet(spreadSheet, sheetName) {
   const sheet = spreadSheet.getSheetByName(sheetName);
   
   if (sheet) {
