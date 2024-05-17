@@ -5,5 +5,4 @@ function createLionsFeedSheet(lionsFeedData) {
   lionsFeedData.sort((a, b) => a[1].localeCompare(b[1]));
   lionsFeedData.forEach(row => sheet.appendRow(row));
   appendSummaryRow(sheet, lionsFeedData.length);
-  //test?
 }

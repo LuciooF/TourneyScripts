@@ -14,31 +14,19 @@ function getFolder(folderName, parentFolder = null) {
   }
 }
 
-function getOrCreateClubSpreadsheet(clubName) {
+function createClubSpreadsheet(clubName) {
   try {
     const folder = FOLDERS.INFO_PACKS;
     const templateSpreadsheet = SPREADSHEETS.INFO_PACK_TEMPLATE;
-
-    console.log("Folder: " + folder);
-    console.log("Template Spreadsheet: " + templateSpreadsheet);
-
     const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
-
-    console.log("New Spreadsheet ID: " + newSpreadsheet.getId());
-
     const file = DriveApp.getFileById(newSpreadsheet.getId());
-
-    console.log("File: " + file);
-
     folder.addFile(file);
-    console.log("File added to folder");
 
     DriveApp.getRootFolder().removeFile(file);
-    console.log("File removed from root folder");
 
     return newSpreadsheet;
   } catch (error) {
-    console.error("Error in getOrCreateClubSpreadsheet: " + error);
+    console.error("Error in createClubSpreadsheet: " + error);
     throw error; // Re-throw the error after logging it
   }
 }

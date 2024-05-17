@@ -16,6 +16,7 @@ function doEverything() {
     writeDataToMasterSheet(masterSheet, dataToWrite);
   
     updateStatus("Logging Errors", "Documenting errors encountered during processing...");
+    SHEETS.ERRORS.clear();
     logUnfilledDeclarationsInSheet(errorRows, headers);
     highlightMissingDeclarations(csvData, declarationData, headers);
   
@@ -134,4 +135,3 @@ function doEverything() {
     const color = (index % 2 === 0) ? "#f0f0f0" : "#ffffff";
     sheet.getRange(lastRow, 1, 1, row.length).setBackground(color);
   }
-  doEverything();

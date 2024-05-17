@@ -23,19 +23,33 @@ function appendRowWithStyles(sheet, row, index) {
 }
 
 
-//This clears from row 6, can probably make it dynamic but cba atm
-function clearSheetContent(sheet) {
-  const startRow = 6;
-  const lastRow = sheet.getLastRow();
-  const lastCol = sheet.getLastColumn();
+//This clears from row 6, can probably make it dynamic but cba
+// function clearSheetContent(sheet) {
+//   const startRow = 6;
+//   const lastRow = sheet.getLastRow();
+//   const lastCol = sheet.getLastColumn();
 
-  if (lastRow >= startRow) {
-    const range = sheet.getRange(startRow, 1, lastRow - startRow + 1, lastCol);
-    range.clearContent();  // Clear content only
-  } else {
-    console.warn('No content to clear.');
-  }
-}
+//   if (lastRow >= startRow) {
+//     const range = sheet.getRange(startRow, 1, lastRow - startRow + 1, lastCol);
+//     range.clearContent();  // Clear content only
+//   } else {
+//     console.warn('No content to clear.');
+//   }
+// }
+// function clearSheetContent(sheet) {
+//   var range = sheet.getRange(6, 1, sheet.getMaxRows() - 5, sheet.getMaxColumns());
+//   var values = range.getValues();
+  
+//   for (var i = 0; i < values.length; i++) {
+//     for (var j = 0; j < values[i].length; j++) {
+//       if (typeof values[i][j] === 'string') {
+//         values[i][j] = '';
+//       }
+//     }
+//   }
+  
+//   range.setValues(values);
+// }
 
 
 
