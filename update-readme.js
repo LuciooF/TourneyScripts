@@ -1,6 +1,6 @@
-const fs = require('fs');
-const { Octokit } = require("@octokit/rest");
-const fetch = require('node-fetch');
+import fs from 'fs';
+import { Octokit } from '@octokit/rest';
+import fetch from 'node-fetch';
 
 // Pass the fetch implementation to Octokit
 const octokit = new Octokit({ 
