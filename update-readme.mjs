@@ -2,7 +2,7 @@ import fs from 'fs';
 import { request } from '@octokit/request';
 import fetch from 'node-fetch';
 
-// GitHub token
+// Retrieve the GitHub token from the environment variable
 const GH_TOKEN = process.env.GH_TOKEN;
 
 async function getIssues() {
@@ -25,6 +25,7 @@ async function getIssues() {
     });
   } catch (error) {
     console.error('Error fetching issues:', error);
+    return []; // Return an empty array if there's an error
   }
 }
 
