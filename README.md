@@ -12,6 +12,8 @@
 
 
 
+
+
 ## Issues
 
 - [x] [Text/Background colours being used in magic strings](https://github.com/LuciooF/Tourney2024Scripts/issues/1)
@@ -23,6 +25,10 @@
 - [x] [Write explanation for the "complicated" functions](https://github.com/LuciooF/Tourney2024Scripts/issues/7)
 - [ ] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8)
 - [ ] [Look into creating proper classes for data sets](https://github.com/LuciooF/Tourney2024Scripts/issues/9)
-- [ ] [Create a github cronjob and script so new issues are added and linked to the readme automatically](https://github.com/LuciooF/Tourney2024Scripts/issues/10)
+- [x] [Create a github cronjob and script so new issues are added and linked to the readme automatically](https://github.com/LuciooF/Tourney2024Scripts/issues/10)
 - [ ] [De-complicate userFeedback.js, make it also a bit less over the top in the "UI"](https://github.com/LuciooF/Tourney2024Scripts/issues/11)
 - [ ] [Properly name "main" function in the standalone workers. Create buttons for them in the google sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/12)
+- [ ] [Try pasting the whole values in range rather than going line by line,. improve performance](https://github.com/LuciooF/Tourney2024Scripts/issues/13)
+- [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14)
+- [ ] [Add club sheets](https://github.com/LuciooF/Tourney2024Scripts/issues/15)
+- [ ] [Add "Food order complete" sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/16)
