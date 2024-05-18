@@ -25,17 +25,17 @@ jobs:
 
       - name: Update README
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }} # Ensure the correct secret name
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # Use the custom secret for API requests
         run: |
           node update-readme.mjs
 
       - name: Commit and push changes
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }} # Ensure the correct secret name
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the default GitHub token for pushing changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add README.md
           git commit -m 'Update README with issue status'
           git push origin HEAD:main
