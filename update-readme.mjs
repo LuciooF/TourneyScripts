@@ -1,26 +1,31 @@
 import fs from 'fs';
-import { Octokit } from '@octokit/rest';
+import { request } from '@octokit/request';
 import fetch from 'node-fetch';
 
-// Pass the fetch implementation to Octokit
-const octokit = new Octokit({ 
-  auth: process.env.GH_TOKEN,
-  request: {
-    fetch: fetch
-  }
-});
+// GitHub token
+const GH_TOKEN = process.env.GH_TOKEN;
 
 async function getIssues() {
-  const issues = await octokit.issues.listForRepo({
-    owner: 'LuciooF', // Replace with your GitHub username
-    repo: 'Tourney2024Scripts', // Replace with your repository name
-    state: 'all'
-  });
+  try {
+    const response = await request('GET /repos/{owner}/{repo}/issues', {
+      headers: {
+        authorization: `token ${GH_TOKEN}`
+      },
+      owner: 'LuciooF', // Replace with your GitHub username
+      repo: 'Tourney2024Scripts', // Replace with your repository name
+      state: 'all',
+      request: {
+        fetch: fetch
+      }
+    });
 
-  return issues.data.map(issue => {
-    const checked = issue.state === 'closed' ? 'x' : ' ';
-    return `- [${checked}] [${issue.title}](${issue.html_url})`;
-  });
+    return response.data.map(issue => {
+      const checked = issue.state === 'closed' ? 'x' : ' ';
+      return `- [${checked}] [${issue.title}](${issue.html_url})`;
+    });
+  } catch (error) {
+    console.error('Error fetching issues:', error);
+  }
 }
 
 async function updateReadme() {
@@ -50,6 +55,6 @@ ${[...updatedIssues].join('\n')}${readmeContent.slice(issueListEnd)}`;
 }
 
 updateReadme().catch(error => {
-  console.error(error);
+  console.error('Error updating README:', error);
   process.exit(1);
 });
