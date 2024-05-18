@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '14' # Ensure this is 14 or later
 
       - name: Install dependencies
         run: npm install @octokit/rest
