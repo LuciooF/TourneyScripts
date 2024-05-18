@@ -1,0 +1,25 @@
+# Ignore all hidden files
+.*
+
+# Ignore node_modules
+node_modules/
+
+# Ignore ESLint configuration files
+.eslintrc.js
+.eslintrc.json
+eslint.config.mjs
+
+# Ignore other configuration files
+.claspignore
+.git/
+.gitignore
+README.md
+
+# Ignore GitHub Actions workflow files
+.github/workflows/
+update-readme.yml
+update-readme.js
+
+# Ignore test files
+**/__tests__/**
+**/*.test.js
