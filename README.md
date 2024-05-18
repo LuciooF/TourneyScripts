@@ -5,14 +5,9 @@
 
 - [x] Try out eslint
 - [x] Remove eslint (I hate it. I hate the fact that I thought it would be better)
-- [ ] Find the reference to the other spreadsheet we should create (Matt mentioned but I lost the sheet)
 - [x] Be cool
-- [ ] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
 - [x] Create issues for all of these so they're linked here
-
-
-
-
+- [ ] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
 
 ## Issues
 
@@ -28,7 +23,9 @@
 - [x] [Create a github cronjob and script so new issues are added and linked to the readme automatically](https://github.com/LuciooF/Tourney2024Scripts/issues/10)
 - [ ] [De-complicate userFeedback.js, make it also a bit less over the top in the "UI"](https://github.com/LuciooF/Tourney2024Scripts/issues/11)
 - [ ] [Properly name "main" function in the standalone workers. Create buttons for them in the google sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/12)
-- [ ] [Try pasting the whole values in range rather than going line by line,. improve performance](https://github.com/LuciooF/Tourney2024Scripts/issues/13)
+- [x] [Try pasting the whole values in range rather than going line by line,. improve performance](https://github.com/LuciooF/Tourney2024Scripts/issues/13)
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14)
 - [ ] [Add club sheets](https://github.com/LuciooF/Tourney2024Scripts/issues/15)
 - [ ] [Add "Food order complete" sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/16)
+- [x] [Separate errors sheet ](https://github.com/LuciooF/Tourney2024Scripts/issues/17)
+

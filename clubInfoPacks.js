@@ -6,13 +6,8 @@
  */
 function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
   const sheet = getSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
-  clearSheetContent(sheet);  // Clear existing content but keep formatting
-
-  //Append headers at row 5, column B
   const startRow = 5;
-  const startColumn = 2;  // Column B
-  sheet.getRange(startRow, startColumn, 1, headers.length).setValues([headers]);
-
+  const startColumn = 2;
   if (Array.isArray(dataRows) && dataRows.length) {
     const range = sheet.getRange(startRow + 1, startColumn, dataRows.length, headers.length);
     range.setValues(dataRows);

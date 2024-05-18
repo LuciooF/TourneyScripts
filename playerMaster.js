@@ -4,14 +4,14 @@
  * Fetches data from the CSV and Declaration sheets, processes the data, writes the processed data to the Master sheet, logs any errors, and updates the Club sheets.
  */
 function doEverything() {
-  clearProgressSheet();
-  updateStatus("Starting Update", "Initializing the update process...");
-  const csvSheet = SHEETS.SQUARE_CSV;
-  const masterSheet = SHEETS.PLAYER_MASTER;
-  const declarationSheet = SHEETS.DECLARATION_FORM;
   try {
+    clearProgressSheet();
+    updateStatus("Starting Update", "Initializing the update process...");
+    const csvSheet = SHEETS.SQUARE_CSV;
+    const masterSheet = SHEETS.PLAYER_MASTER;
+    const declarationSheet = SHEETS.DECLARATION_FORM;
+    
     updateStatus("Fetching Data", "Retrieving data from CSV and Declaration sheets...");
-    const headers = prepareMasterSheet(masterSheet);
     const [csvData, declarationData] = fetchCsvAndDeclarationData(csvSheet, declarationSheet);
 
     updateStatus("Processing Data", "Analyzing and processing data...");
@@ -21,9 +21,8 @@ function doEverything() {
     writeDataToMasterSheet(masterSheet, dataToWrite);
 
     updateStatus("Logging Errors", "Documenting errors encountered during processing...");
-    SHEETS.ERRORS.clear();
-    logUnfilledDeclarationsInSheet(errorRows, headers);
-    highlightMissingDeclarations(csvData, declarationData, headers);
+    logUnfilledDeclarationsInSheet(errorRows);
+    highlightIncorrectOrderNumber(csvData, declarationData);
 
     updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
     updateClubSheets();
@@ -34,17 +33,6 @@ function doEverything() {
     console.log("Error", err);
     logError(err);
   }
-}
-/**
- * Clears the master sheet and setups headers.
- * @param {Object} masterSheet - The master sheet object.
- * @returns {Array} The headers of the master sheet.
- */
-function prepareMasterSheet(masterSheet) {
-  masterSheet.clear();
-  const headers = HEADERS.MASTER_SHEET;
-  masterSheet.appendRow(headers);
-  return headers;
 }
 /**
  * Fetches data from CSV and declaration sheets.
@@ -118,9 +106,9 @@ function constructRowFromData(csvRow, declarationRow) {
  */
 function writeDataToMasterSheet(masterSheet, dataToWrite) {
   dataToWrite.sort((a, b) => a[7].localeCompare(b[7]));
-  dataToWrite.forEach((row, index) => {
-    appendRowWithStyles(masterSheet, row, index);
-  });
+  masterSheet.clear();
+  writeDataToSheet(masterSheet, dataToWrite, HEADERS.MASTER_SHEET);
+  applyAlternatingRowStyles(masterSheet);
 }
 
 /**
@@ -128,15 +116,15 @@ function writeDataToMasterSheet(masterSheet, dataToWrite) {
  * @param {Array} errorRows - The error rows.
  */
 function logUnfilledDeclarationsInSheet(errorRows) {
-  const errorsSheet = SHEETS.ERRORS;
-  var rowNumber = errorsSheet.appendRow(["Error: Unfilled Declarations"]).getLastRow();
+  const missingDeclarationsSheet = SHEETS.MISSING_DECLARATIONS;
+  var rowNumber = missingDeclarationsSheet.appendRow(["Error: Unfilled Declarations"]).getLastRow();
 
   // Get the range of the last added row for the first 11 columns
-  var cell = errorsSheet.getRange(rowNumber, 1, 1, 11);
+  var cell = missingDeclarationsSheet.getRange(rowNumber, 1, 1, 11);
 
   // Set the background color to purple and make the text bold for the first 11 columns
   cell.setBackground(COLOR.LAVENDER).setFontWeight("bold").setFontSize(14);
-  errorRows.forEach(row => appendErrorRow(errorsSheet, row, "lightblue"));
+  writeDataToSheet(missingDeclarationsSheet, errorRows, HEADERS.ERRORS);
 }
 
 /**
@@ -144,12 +132,12 @@ function logUnfilledDeclarationsInSheet(errorRows) {
  * @param {Array} csvData - The CSV data.
  * @param {Array} declarationData - The declaration data.
  */
-function highlightMissingDeclarations(csvData, declarationData) {
-  const errorsSheet = SHEETS.ERRORS;
-  var rowNumber = errorsSheet.appendRow(["Error: Declarations without Corresponding CSV Entry"]).getLastRow();
+function highlightIncorrectOrderNumber(csvData, declarationData) {
+  const sheet = SHEETS.INCORRECT_ORDER_NUMBER;
+  var rowNumber = sheet.appendRow(["Error: Declarations without Corresponding CSV Entry"]).getLastRow();
 
   // Get the range of the last added row for the first 11 columns
-  var cell = errorsSheet.getRange(rowNumber, 1, 1, 11);
+  var cell = sheet.getRange(rowNumber, 1, 1, 11);
 
   // Set the background color to red and make the text bold for the first 11 columns
   cell.setBackground("red").setFontWeight("bold").setFontSize(14);
@@ -159,7 +147,27 @@ function highlightMissingDeclarations(csvData, declarationData) {
     const orderNumber = normalizeOrderNumber(row[1]);
     if (!csvOrderNumbers.includes(orderNumber)) {
       const rowData = [orderNumber, ...row.slice(0, 1), ...row.slice(2, 5)];
-      appendErrorRow(errorsSheet, rowData, 'pink');
+      appendErrorRow(sheet, rowData, 'pink');
     }
   });
+}
+/**
+ * Highlights missing declarations in the 'Errors' sheet.
+ * @param {Array} csvData - The CSV data.
+ * @param {Array} declarationData - The declaration data.
+ */
+function highlightIncorrectOrderNumber(csvData, declarationData) {
+  const sheet = SHEETS.INCORRECT_ORDER_NUMBER;
+  const errorHeader = ["Error: Declarations without Corresponding CSV Entry"];
+
+  const csvOrderNumbers = csvData.map(row => normalizeOrderNumber(row[0]));
+  const errorRows = declarationData
+    .filter(row => !csvOrderNumbers.includes(normalizeOrderNumber(row[1])))
+    .map(row => [normalizeOrderNumber(row[1]), ...row.slice(0, 1), ...row.slice(2, 5)]);
+
+  // Write the error rows to the sheet
+  if (errorRows.length > 0) {
+    writeDataToSheet(sheet, errorRows, errorHeader);
+  }
+  applyAlternatingRowStyles(sheet);
 }

@@ -36,18 +36,6 @@ function getSheetByName(spreadsheet, sheetName) {
   return sheet;
 }
 /**
- * Appends a row to a sheet and sets the background color based on the row index.
- * @param {Object} sheet - The sheet to append to.
- * @param {Array} row - The row to append.
- * @param {number} index - The index of the row.
- */
-function appendRowWithStyles(sheet, row, index) {
-  sheet.appendRow(row);
-  let lastRow = sheet.getLastRow();
-  let backgroundColor = (index % 2 === 0) ? COLOR.WHITE: COLOR.GREY;
-  sheet.getRange(lastRow, 1, 1, row.length).setBackground(backgroundColor);
-}
-/**
  * Clears the content of a sheet starting from a specific row.
  * @param {Object} sheet - The sheet to clear.
  */
@@ -109,4 +97,58 @@ function extractCsvValues(csvRow) {
     csvRow[6] ? parseFloat(csvRow[6]) : 0,                   // Order Total
     csvRow[7] ? parseFloat(csvRow[7]) : 0                    // Refunded Amount
   ];
+}
+/**
+ * Write data rows to a specified sheet with alternating colors.
+ * @param {Object} sheet - The sheet object.
+ * @param {Array} dataToWrite - The data to write.
+ * @param {Array} [headers] - The headers for the data. If not provided, it assumes headers are already in the sheet.
+ */
+function writeDataToSheet(sheet, dataToWrite, headers) {
+  if (Array.isArray(dataToWrite) && dataToWrite.length) {
+    let startRow = 2; // Default start row if headers are not provided
+
+    if (headers) {
+      clearAndAppendHeaders(sheet, headers);
+    }
+
+    const startColumn = 1;
+    const numRows = dataToWrite.length;
+    const numColumns = dataToWrite[0].length;
+
+    // Write all data at once
+    const range = sheet.getRange(startRow, startColumn, numRows, numColumns);
+    range.setValues(dataToWrite);
+  }
+  else {
+    console.error('Invalid data format:', dataToWrite);
+    throw Error('Invalid data format' + dataToWrite);
+  }
+}
+/**
+ * Apply alternating row styles to all populated rows, ignoring the header row.
+ * @param {Object} sheet - The sheet object.
+ */
+function applyAlternatingRowStyles(sheet) {
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+
+  for (let row = 2; row <= lastRow; row++) {
+    const color = (row - 2) % 2 === 0 ? COLOR.WHITE : COLOR.GREY;
+    sheet.getRange(row, 1, 1, lastColumn).setBackground(color);
+  }
+}
+/**
+ * Append headers to the first row of a specified sheet with styling.
+ * @param {Object} sheet - The sheet object.
+ * @param {Array} headers - The headers to append.
+ */
+function clearAndAppendHeaders(sheet, headers) {
+  sheet.clear(); // Clear the sheet before appending headers
+  sheet.appendRow(headers); // Add headers to the first row
+
+  const headerRange = sheet.getRange(1, 1, 1, headers.length);
+  headerRange.setFontWeight("bold")
+    .setBackground(COLOR.LIGHT_GREEN) 
+    .setFontColor(COLOR.WHITE); 
 }

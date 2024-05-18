@@ -3,6 +3,7 @@ import { request } from '@octokit/request';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 
+//All this does is re-generate the readme file with the issues from the repo.
 // Load environment variables from .env file
 dotenv.config();
 

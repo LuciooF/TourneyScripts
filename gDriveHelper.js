@@ -110,6 +110,7 @@ function getSheet(spreadSheet, sheetName) {
   const sheet = spreadSheet.getSheetByName(sheetName);
   
   if (sheet) {
+    console.log("Sheet found: " + sheetName)
     return sheet;
   } else {
     throw new Error(`Sheet "${sheetName}" not found.`);
