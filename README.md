@@ -21,7 +21,7 @@
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4)
 - [ ] [Create Food Master sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/5)
 - [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6)
-- [ ] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8)
+- [x] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8)
 - [ ] [Look into creating proper classes for data sets](https://github.com/LuciooF/Tourney2024Scripts/issues/9)
 - [ ] [De-complicate userFeedback.js, make it also a bit less over the top in the "UI"](https://github.com/LuciooF/Tourney2024Scripts/issues/11)
 - [ ] [Properly name "main" function in the standalone workers. Create buttons for them in the google sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/12)

@@ -119,10 +119,8 @@ function logUnfilledDeclarationsInSheet(errorRows) {
   const missingDeclarationsSheet = SHEETS.MISSING_DECLARATIONS;
   var rowNumber = missingDeclarationsSheet.appendRow(["Error: Unfilled Declarations"]).getLastRow();
 
-  // Get the range of the last added row for the first 11 columns
   var cell = missingDeclarationsSheet.getRange(rowNumber, 1, 1, 11);
 
-  // Set the background color to purple and make the text bold for the first 11 columns
   cell.setBackground(COLOR.LAVENDER).setFontWeight("bold").setFontSize(14);
   writeDataToSheet(missingDeclarationsSheet, errorRows, HEADERS.ERRORS);
 }
@@ -136,10 +134,7 @@ function highlightIncorrectOrderNumber(csvData, declarationData) {
   const sheet = SHEETS.INCORRECT_ORDER_NUMBER;
   var rowNumber = sheet.appendRow(["Error: Declarations without Corresponding CSV Entry"]).getLastRow();
 
-  // Get the range of the last added row for the first 11 columns
   var cell = sheet.getRange(rowNumber, 1, 1, 11);
-
-  // Set the background color to red and make the text bold for the first 11 columns
   cell.setBackground("red").setFontWeight("bold").setFontSize(14);
 
   const csvOrderNumbers = csvData.map(row => normalizeOrderNumber(row[0]));
@@ -165,7 +160,6 @@ function highlightIncorrectOrderNumber(csvData, declarationData) {
     .filter(row => !csvOrderNumbers.includes(normalizeOrderNumber(row[1])))
     .map(row => [normalizeOrderNumber(row[1]), ...row.slice(0, 1), ...row.slice(2, 5)]);
 
-  // Write the error rows to the sheet
   if (errorRows.length > 0) {
     writeDataToSheet(sheet, errorRows, errorHeader);
   }

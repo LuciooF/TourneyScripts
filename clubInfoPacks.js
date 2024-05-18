@@ -56,13 +56,13 @@ function compileClubData(playerData, foodMap) {
   const clubData = {};
   const lionsFeedData = [];
 
-  playerData.slice(1).forEach(row => { // Skip header
+  playerData.slice(1).forEach(row => {
     const club = row[7];
     if (!clubData[club]) clubData[club] = [];
     const foodRow = foodMap.get(row[0]) || ["TODO", "TODO", "TODO"];
     const rowData = constructRowData(row, foodRow);
     clubData[club].push(rowData);
-    lionsFeedData.push([row[2], club, foodRow[2] || "N/A"]); // Name, Club, Dietary Requirements
+    lionsFeedData.push([row[2], club, foodRow[2] || "N/A"]);
   });
 
   return { clubData, lionsFeedData };

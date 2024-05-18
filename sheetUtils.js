@@ -46,7 +46,7 @@ function clearSheetContent(sheet) {
 
   if (lastRow >= startRow) {
     const range = sheet.getRange(startRow, 1, lastRow - startRow + 1, lastCol);
-    range.clearContent();  // Clear content only
+    range.clearContent();
   } else {
     console.warn('No content to clear.');
   }
@@ -106,7 +106,7 @@ function extractCsvValues(csvRow) {
  */
 function writeDataToSheet(sheet, dataToWrite, headers) {
   if (Array.isArray(dataToWrite) && dataToWrite.length) {
-    let startRow = 2; // Default start row if headers are not provided
+    let startRow = 2;
 
     if (headers) {
       clearAndAppendHeaders(sheet, headers);
@@ -116,7 +116,6 @@ function writeDataToSheet(sheet, dataToWrite, headers) {
     const numRows = dataToWrite.length;
     const numColumns = dataToWrite[0].length;
 
-    // Write all data at once
     const range = sheet.getRange(startRow, startColumn, numRows, numColumns);
     range.setValues(dataToWrite);
   }
@@ -144,8 +143,8 @@ function applyAlternatingRowStyles(sheet) {
  * @param {Array} headers - The headers to append.
  */
 function clearAndAppendHeaders(sheet, headers) {
-  sheet.clear(); // Clear the sheet before appending headers
-  sheet.appendRow(headers); // Add headers to the first row
+  sheet.clear();
+  sheet.appendRow(headers);
 
   const headerRange = sheet.getRange(1, 1, 1, headers.length);
   headerRange.setFontWeight("bold")

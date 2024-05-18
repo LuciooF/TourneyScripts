@@ -39,7 +39,7 @@ function createClubSpreadsheet(clubName) {
     return newSpreadsheet;
   } catch (error) {
     console.error("Error in createClubSpreadsheet: " + error);
-    throw error; // Re-throw the error after logging it
+    throw error;
   }
 }
 /**
@@ -57,7 +57,7 @@ function getOrCreateSpreadsheet(spreadsheetName, folder) {
     const newSpreadsheet = SpreadsheetApp.create(spreadsheetName);
     const file = DriveApp.getFileById(newSpreadsheet.getId());
     folder.addFile(file);
-    DriveApp.getRootFolder().removeFile(file);  // Remove from root folder
+    DriveApp.getRootFolder().removeFile(file); 
     return newSpreadsheet;
   }
 }
@@ -70,19 +70,14 @@ function getOrCreateSpreadsheet(spreadsheetName, folder) {
  */
 function duplicateTemplateSpreadsheet(templateSpreadsheet, clubName) {
   try {
-    // Get the template file by ID
     const templateFile = DriveApp.getFileById(templateSpreadsheet.getId());
-
-    // Make a copy of the template with the new name
     const newFile = templateFile.makeCopy(clubName);
-
-    // Open the new file as a Spreadsheet
     const newSpreadsheet = SpreadsheetApp.openById(newFile.getId());
 
     return newSpreadsheet;
   } catch (error) {
     console.error("Error in duplicateTemplateSpreadsheet: " + error);
-    throw error; // Re-throw the error after logging it
+    throw error;
   }
 }
 /**
@@ -90,10 +85,7 @@ function duplicateTemplateSpreadsheet(templateSpreadsheet, clubName) {
  * @param {Object} folder - The folder to delete sheets from.
  */
 function deleteAllSheetsInFolder(folder) {
-  // Get all files in the folder
   const files = folder.getFiles();
-  
-  // Loop through the files and delete those that are Google Sheets
   while (files.hasNext()) {
     const file = files.next();
       file.setTrashed(true);
