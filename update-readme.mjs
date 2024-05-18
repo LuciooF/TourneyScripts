@@ -1,6 +1,10 @@
 import fs from 'fs';
 import { request } from '@octokit/request';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Retrieve the GitHub token from the environment variable
 const GH_TOKEN = process.env.GH_TOKEN;
@@ -14,6 +18,8 @@ async function getIssues() {
       owner: 'LuciooF', // Replace with your GitHub username
       repo: 'Tourney2024Scripts', // Replace with your repository name
       state: 'all',
+      sort: 'created', // Sort by creation date
+      direction: 'asc', // Ascending order
       request: {
         fetch: fetch
       }
@@ -42,14 +48,11 @@ async function updateReadme() {
   // Get the current issues from GitHub
   const issuesList = await getIssues();
 
-  // Merge the existing issues with the new issues, avoiding duplicates
-  const updatedIssues = new Set([...existingIssueList, ...issuesList]);
-
   // Create the new README content
   const updatedReadmeContent = `${readmeContent.slice(0, issueListStart)}
 ## Issues
 
-${[...updatedIssues].join('\n')}${readmeContent.slice(issueListEnd)}`;
+${issuesList.join('\n')}${readmeContent.slice(issueListEnd)}`;
 
   // Write the updated content back to the README file
   fs.writeFileSync(readmePath, updatedReadmeContent);
