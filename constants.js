@@ -14,7 +14,7 @@ const FOLDER_NAMES = Object.freeze({
 });
 
 const SHEET_NAMES = Object.freeze({
-    PLAYER_MASTER: "Player Master",
+    PLAYER_MASTER: "Players",
     SQUARE_CSV: "Square CSV",
     DECLARATION_FORM: "Declaration Form",
     FOOD_FORM: "Food Form",
