@@ -3,7 +3,6 @@ import { request } from '@octokit/request';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 
-//All this does is re-generate the readme file with the issues from the repo.
 // Load environment variables from .env file
 dotenv.config();
 
@@ -26,10 +25,11 @@ async function getIssues() {
       }
     });
 
-    return response.data.map(issue => {
-      const checked = issue.state === 'closed' ? 'x' : ' ';
-      return `- [${checked}] [${issue.title}](${issue.html_url})`;
-    });
+    return response.data.map(issue => ({
+      state: issue.state,
+      title: issue.title,
+      url: issue.html_url
+    }));
   } catch (error) {
     console.error('Error fetching issues:', error);
     return []; // Return an empty array if there's an error
@@ -41,22 +41,24 @@ async function updateReadme() {
   const readmePath = 'README.md';
   const readmeContent = fs.readFileSync(readmePath, 'utf-8');
 
-  // Extract the current issues list from the README
-  const issueListStart = readmeContent.indexOf('## Issues');
-  const issueListEnd = readmeContent.indexOf('\n\n', issueListStart);
-  const existingIssueList = readmeContent.slice(issueListStart, issueListEnd).split('\n').slice(2);
-
   // Get the current issues from GitHub
-  const issuesList = await getIssues();
+  const issues = await getIssues();
+
+  // Separate the issues into closed and open
+  const closedIssues = issues.filter(issue => issue.state === 'closed');
+  const openIssues = issues.filter(issue => issue.state === 'open');
+
+  // Format the issues for the README
+  const formatIssue = issue => `- [${issue.state === 'closed' ? 'x' : ' '}] [${issue.title}](${issue.url})`;
+  const issuesList = [...closedIssues, ...openIssues].map(formatIssue);
 
   // Create the new README content
-  const updatedReadmeContent = `${readmeContent.slice(0, issueListStart)}
-## Issues
-
-${issuesList.join('\n')}${readmeContent.slice(issueListEnd)}`;
+  const issueListStart = readmeContent.indexOf('## Issues');
+  const updatedReadmeContent = `${readmeContent.slice(0, issueListStart + '## Issues'.length)}
+\n${issuesList.join('\n')}`;
 
   // Write the updated content back to the README file
-  fs.writeFileSync(readmePath, updatedReadmeContent);
+  fs.writeFileSync(readmePath, updatedReadmeContent, 'utf-8');
 }
 
 updateReadme().catch(error => {
