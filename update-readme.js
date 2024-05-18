@@ -1,7 +1,14 @@
 const fs = require('fs');
 const { Octokit } = require("@octokit/rest");
+const fetch = require('node-fetch');
 
-const octokit = new Octokit({ auth: process.env.GH_TOKEN });
+// Pass the fetch implementation to Octokit
+const octokit = new Octokit({ 
+  auth: process.env.GH_TOKEN,
+  request: {
+    fetch: fetch
+  }
+});
 
 async function getIssues() {
   const issues = await octokit.issues.listForRepo({
