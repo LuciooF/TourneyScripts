@@ -23,6 +23,7 @@ async function getIssues() {
     });
 
     return response.data.map(issue => ({
+      number: issue.number,
       state: issue.state,
       title: issue.title,
       url: issue.html_url
@@ -44,7 +45,7 @@ async function updateReadme() {
   const openIssues = issues.filter(issue => issue.state === 'open');
 
   // Format the issues for the README
-  const formatIssue = issue => `- [${issue.state === 'closed' ? 'x' : ' '}] [${issue.title}](${issue.url})`;
+  const formatIssue = issue => `- [${issue.state === 'closed' ? 'x' : ' '}][${issue.title}](${issue.url}) {${issue.number}} `;
   const issuesList = [...closedIssues, ...openIssues].map(formatIssue);
 
   // Create the new README content
