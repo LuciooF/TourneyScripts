@@ -5,7 +5,6 @@
  */
 function doEverything() {
   try {
-    clearProgressSheet();
     updateStatus("Starting Update", "Initializing the update process...");
     const csvSheet = SHEETS.SQUARE_CSV;
     const masterSheet = SHEETS.PLAYER_MASTER;
@@ -123,28 +122,6 @@ function logUnfilledDeclarationsInSheet(errorRows) {
 
   cell.setBackground(COLOR.LAVENDER).setFontWeight("bold").setFontSize(14);
   writeDataToSheet(missingDeclarationsSheet, errorRows, HEADERS.ERRORS);
-}
-
-/**
- * Highlights missing declarations in the 'Errors' sheet.
- * @param {Array} csvData - The CSV data.
- * @param {Array} declarationData - The declaration data.
- */
-function highlightIncorrectOrderNumber(csvData, declarationData) {
-  const sheet = SHEETS.INCORRECT_ORDER_NUMBER;
-  var rowNumber = sheet.appendRow(["Error: Declarations without Corresponding CSV Entry"]).getLastRow();
-
-  var cell = sheet.getRange(rowNumber, 1, 1, 11);
-  cell.setBackground("red").setFontWeight("bold").setFontSize(14);
-
-  const csvOrderNumbers = csvData.map(row => normalizeOrderNumber(row[0]));
-  declarationData.forEach(row => {
-    const orderNumber = normalizeOrderNumber(row[1]);
-    if (!csvOrderNumbers.includes(orderNumber)) {
-      const rowData = [orderNumber, ...row.slice(0, 1), ...row.slice(2, 5)];
-      appendErrorRow(sheet, rowData, 'pink');
-    }
-  });
 }
 /**
  * Highlights missing declarations in the 'Errors' sheet.
