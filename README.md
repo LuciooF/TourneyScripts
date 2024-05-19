@@ -18,13 +18,13 @@
 - [x] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8){8} 
 - [x] [Look into creating proper classes for data sets](https://github.com/LuciooF/Tourney2024Scripts/issues/9){9} 
 - [x] [Create a github cronjob and script so new issues are added and linked to the readme automatically](https://github.com/LuciooF/Tourney2024Scripts/issues/10){10} 
+- [x] [De-complicate userFeedback.js, make it also a bit less over the top in the "UI"](https://github.com/LuciooF/Tourney2024Scripts/issues/11){11} 
 - [x] [Properly name "main" function in the standalone workers. Create buttons for them in the google sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/12){12} 
 - [x] [Try pasting the whole values in range rather than going line by line,. improve performance](https://github.com/LuciooF/Tourney2024Scripts/issues/13){13} 
 - [x] [Separate errors sheet ](https://github.com/LuciooF/Tourney2024Scripts/issues/17){17} 
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
 - [ ] [Create Food Master sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/5){5} 
 - [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 
-- [ ] [De-complicate userFeedback.js, make it also a bit less over the top in the "UI"](https://github.com/LuciooF/Tourney2024Scripts/issues/11){11} 
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 
 - [ ] [Add club sheets](https://github.com/LuciooF/Tourney2024Scripts/issues/15){15} 
 - [ ] [Add "Food order complete" sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/16){16} 
