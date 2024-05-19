@@ -10,7 +10,7 @@ function updateStatus(currentStep, message) {
   const status = `${currentStep}: ${message}`;
 
   progressSheet.getRange(`A${newRow}`).setValue(status).setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold");
-  progressSheet.getRange(`B${newRow}`).setValue(new Date()).setFontColor(COLOR.BLACK).setFontSize(12);
+  progressSheet.getRange(`B${newRow}`).setValue(new Date().toLocaleString('en-US', { hour12: false })).setFontColor(COLOR.BLACK).setFontSize(12);
   progressSheet.getRange(`C${newRow}`).setValue("Status: Done").setFontColor(COLOR.DARK_GREEN).setFontSize(12).setFontWeight("bold");
 }
 function logError(err) {
@@ -33,6 +33,6 @@ function addSuccessfullRunStatus() {
   const status = `If you're seeing this, it means all tasks completed successfully! :D`;
 
   progressSheet.getRange(`A${newRow}`).setValue(status).setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold").setBackground(COLOR.LIGHT_GREEN);
-  progressSheet.getRange(`B${newRow}`).setValue(new Date()).setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold").setBackground(COLOR.LIGHT_GREEN);
+  progressSheet.getRange(`B${newRow}`).setValue(new Date().toLocaleString('en-US', { hour12: false })).setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold").setBackground(COLOR.LIGHT_GREEN);
   progressSheet.getRange(`C${newRow}`).setValue("Status: Done").setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold").setBackground(COLOR.LIGHT_GREEN);
 }

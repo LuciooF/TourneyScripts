@@ -27,7 +27,7 @@ function doEverythingButton() {
         createClubSpreadsheets();
         updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
 
-        updateStatus("Update Complete", "All tasks completed successfully at " + new Date());
+        updateStatus("Update Complete", "All tasks completed successfully at " + new Date().toLocaleString('en-US', { hour12: false }));
         addSuccessfullRunStatus();
     }
     catch (err) {
