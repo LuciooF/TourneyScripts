@@ -23,7 +23,7 @@ const SHEET_NAMES = Object.freeze({
     INCORRECT_ORDER_NUMBER: "Incorrect Order Number",
     DUPLICATE_NAME: "Duplicate Name",
     PLAYER_DETAILS: "Player Details",
-    LIONS_FEED:"Lions Feed"
+    LIONS_FEED: "Lions Feed"
 });
 
 //Need to do like this to avoid circular dependencies
@@ -64,7 +64,7 @@ const HEADERS = Object.freeze({
     ],
     LIONS_FEED: ["Name", "Club", "Food Choices", "Dietary Requirements"],
     PLAYER_INFORMATION: ["Order Number", "Order Date", "Name", "Ticket Name", "Paid", "Refunded", "Remaining", "Food Selected Y/N", "Lunch Y/N", "Food to be Paid", "Food Choices", "Dietary Requirements"],
-    ERRORS: ["Order Number", "Date", "Name", "Email","Number","Ticket","?","Paid","Refunded","Remaining"],
+    ERRORS: ["Order Number", "Date", "Name", "Email", "Number", "Ticket", "?", "Paid", "Refunded", "Remaining"],
 });
 
 const COLOR = Object.freeze({
@@ -73,7 +73,7 @@ const COLOR = Object.freeze({
     BLUE_GREY: "#455a64",
     DARK_GREEN: "#388e3c",
     LIGHT_GREEN: "#c8e6c9",
-    BLACK:'#000000',
+    BLACK: '#000000',
     SALMON: 'ffab91',
     RED: '#ff0000',
     LAVENDER: '#CBC3E3'

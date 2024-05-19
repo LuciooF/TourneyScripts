@@ -87,7 +87,7 @@ function constructRowData(playerRow, foodRow) {
  * Fetches data from sheets, processes it, and appends it to the club sheets.
  * Also updates the Lions Feed sheet with the compiled data. (It made sense to do it here as we are reusing the data)
  */
-function updateClubSheets() {
+function createClubSpreadsheets() {
   const { playerData, foodData } = fetchDataFromSheets();
   const { clubData, lionsFeedData } = processClubData(playerData, foodData);
 

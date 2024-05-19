@@ -1,38 +1,4 @@
-/**
- * Main function that orchestrates the entire process.
- * Pretty much does everything in the prefered order.
- * Fetches data from the CSV and Declaration sheets, processes the data, writes the processed data to the Master sheet, logs any errors, and updates the Club sheets.
- */
-function doEverything() {
-  try {
-    updateStatus("Starting Update", "Initializing the update process...");
-    const csvSheet = SHEETS.SQUARE_CSV;
-    const masterSheet = SHEETS.PLAYER_MASTER;
-    const declarationSheet = SHEETS.DECLARATION_FORM;
-    
-    updateStatus("Fetching Data", "Retrieving data from CSV and Declaration sheets...");
-    const [csvData, declarationData] = fetchCsvAndDeclarationData(csvSheet, declarationSheet);
 
-    updateStatus("Processing Data", "Analyzing and processing data...");
-    const [dataToWrite, errorRows] = processCsvAndDeclarationData(csvData, declarationData);
-
-    updateStatus("Writing to Master Sheet", "Populating the master sheet with processed data...");
-    writeDataToMasterSheet(masterSheet, dataToWrite);
-
-    updateStatus("Logging Errors", "Documenting errors encountered during processing...");
-    logUnfilledDeclarationsInSheet(errorRows);
-    highlightIncorrectOrderNumber(csvData, declarationData);
-
-    updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
-    updateClubSheets();
-
-    updateStatus("Update Complete", "All tasks completed successfully at " + new Date());
-  }
-  catch (err) {
-    console.log("Error", err);
-    logError(err);
-  }
-}
 /**
  * Fetches data from CSV and declaration sheets.
  * @param {Object} csvSheet - The CSV sheet object.
@@ -103,11 +69,11 @@ function constructRowFromData(csvRow, declarationRow) {
  * @param {Object} masterSheet - The master sheet object.
  * @param {Array} dataToWrite - The data to write.
  */
-function writeDataToMasterSheet(masterSheet, dataToWrite) {
+function populatePlayerSheet(playerSheet, dataToWrite) {
   dataToWrite.sort((a, b) => a[7].localeCompare(b[7]));
-  masterSheet.clear();
-  writeDataToSheet(masterSheet, dataToWrite, HEADERS.MASTER_SHEET);
-  applyAlternatingRowStyles(masterSheet);
+  playerSheet.clear();
+  writeDataToSheet(playerSheet, dataToWrite, HEADERS.MASTER_SHEET);
+  applyAlternatingRowStyles(playerSheet);
 }
 
 /**

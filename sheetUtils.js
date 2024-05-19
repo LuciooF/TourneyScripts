@@ -9,14 +9,14 @@ function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
   let sheet = spreadsheet.getSheetByName(sheetName);
   if (!sheet) {
     sheet = spreadsheet.insertSheet(sheetName);
-    if(headers != null){
-    sheet.appendRow(headers);
+    if (headers != null) {
+      sheet.appendRow(headers);
     }
   }
-  else{
+  else {
     sheet.clear();
-    if(headers != null){
-    sheet.appendRow(headers);
+    if (headers != null) {
+      sheet.appendRow(headers);
     }
   }
   return sheet;
@@ -148,6 +148,6 @@ function clearAndAppendHeaders(sheet, headers) {
 
   const headerRange = sheet.getRange(1, 1, 1, headers.length);
   headerRange.setFontWeight("bold")
-    .setBackground(COLOR.LIGHT_GREEN) 
-    .setFontColor(COLOR.WHITE); 
+    .setBackground(COLOR.LIGHT_GREEN)
+    .setFontColor(COLOR.WHITE);
 }

@@ -7,7 +7,7 @@
  */
 function getFolder(folderName, parentFolder = null) {
   let folders;
-  
+
   if (parentFolder) {
     folders = parentFolder.getFoldersByName(folderName);
   } else {
@@ -50,14 +50,14 @@ function createClubSpreadsheet(clubName) {
  */
 function getOrCreateSpreadsheet(spreadsheetName, folder) {
   const existingFiles = folder.getFilesByName(spreadsheetName);
-  
+
   if (existingFiles.hasNext()) {
     return SpreadsheetApp.open(existingFiles.next());
   } else {
     const newSpreadsheet = SpreadsheetApp.create(spreadsheetName);
     const file = DriveApp.getFileById(newSpreadsheet.getId());
     folder.addFile(file);
-    DriveApp.getRootFolder().removeFile(file); 
+    DriveApp.getRootFolder().removeFile(file);
     return newSpreadsheet;
   }
 }
@@ -88,7 +88,7 @@ function deleteAllSheetsInFolder(folder) {
   const files = folder.getFiles();
   while (files.hasNext()) {
     const file = files.next();
-      file.setTrashed(true);
+    file.setTrashed(true);
   }
 }
 /**
@@ -100,7 +100,7 @@ function deleteAllSheetsInFolder(folder) {
  */
 function getSheet(spreadSheet, sheetName) {
   const sheet = spreadSheet.getSheetByName(sheetName);
-  
+
   if (sheet) {
     console.log("Sheet found: " + sheetName)
     return sheet;

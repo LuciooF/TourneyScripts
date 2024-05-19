@@ -12,8 +12,8 @@ async function getIssues() {
       headers: {
         authorization: `token ${GH_TOKEN}`
       },
-      owner: 'LuciooF', 
-      repo: 'Tourney2024Scripts', 
+      owner: 'LuciooF',
+      repo: 'Tourney2024Scripts',
       state: 'all',
       sort: 'created',
       direction: 'asc',
