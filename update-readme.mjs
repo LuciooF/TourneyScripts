@@ -45,7 +45,7 @@ async function updateReadme() {
   const openIssues = issues.filter(issue => issue.state === 'open');
 
   // Format the issues for the README
-  const formatIssue = issue => `- [${issue.state === 'closed' ? 'x' : ' '}][${issue.title}](${issue.url}) {${issue.number}} `;
+  const formatIssue = issue => `- [${issue.state === 'closed' ? 'x' : ' '}] [${issue.title}](${issue.url}){${issue.number}} `;
   const issuesList = [...closedIssues, ...openIssues].map(formatIssue);
 
   // Create the new README content
