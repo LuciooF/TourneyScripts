@@ -23,7 +23,8 @@ const SHEET_NAMES = Object.freeze({
     INCORRECT_ORDER_NUMBER: "Incorrect Order Number",
     DUPLICATE_NAME: "Duplicate Name",
     PLAYER_DETAILS: "Player Details",
-    LIONS_FEED: "Lions Feed"
+    LIONS_FEED: "Lions Feed",
+    CLUB: "Club"
 });
 
 //Need to do like this to avoid circular dependencies
@@ -54,7 +55,8 @@ const SHEETS = Object.freeze({
     FOOD_FORM: getSheet(SPREADSHEETS.LUCAS_PLAYGROUND, SHEET_NAMES.FOOD_FORM),
     DECLARATION_FORM: getSheet(SPREADSHEETS.LUCAS_PLAYGROUND, SHEET_NAMES.DECLARATION_FORM),
     SQUARE_CSV: getSheet(SPREADSHEETS.LUCAS_PLAYGROUND, SHEET_NAMES.SQUARE_CSV),
-    LIONS_FEED: getSheet(SPREADSHEETS.LIONS_FEED, SHEET_NAMES.LIONS_FEED)
+    LIONS_FEED: getSheet(SPREADSHEETS.LIONS_FEED, SHEET_NAMES.LIONS_FEED),
+    CLUB: getSheet(SPREADSHEETS.LUCAS_PLAYGROUND, SHEET_NAMES.CLUB)
 });
 
 const HEADERS = Object.freeze({
@@ -65,6 +67,7 @@ const HEADERS = Object.freeze({
     LIONS_FEED: ["Name", "Club", "Food Choices", "Dietary Requirements"],
     PLAYER_INFORMATION: ["Order Number", "Order Date", "Name", "Ticket Name", "Paid", "Refunded", "Remaining", "Food Selected Y/N", "Lunch Y/N", "Food to be Paid", "Food Choices", "Dietary Requirements"],
     ERRORS: ["Order Number", "Date", "Name", "Email", "Number", "Ticket", "?", "Paid", "Refunded", "Remaining"],
+    CLUB: ['Club Name', 'Player Count', 'Club Link']
 });
 
 const COLOR = Object.freeze({

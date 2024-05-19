@@ -98,17 +98,8 @@ function populateIncorrectOrderNumberSheetButton() {
 }
 function createClubSpreadsheetsButton() {
     try {
-        createClubSpreadsheets();
-        updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
-        addSuccessfullRunStatus();
-    }
-    catch (err) {
-        console.log("Error", err);
-        logError(err);
-    }
-}
-function popoulateLionsFeedButton() {
-    try {
+        clearProgressSheet();
+        updateStatus("Starting Update", "Initializing the update process...");
         createClubSpreadsheets();
         updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
         addSuccessfullRunStatus();

@@ -26,15 +26,15 @@ function getFolder(folderName, parentFolder = null) {
  * @returns {Object} The new spreadsheet.
  * @throws {Error} If an error occurs while creating the spreadsheet.
  */
-function createClubSpreadsheet(clubName) {
+async function createClubSpreadsheet(clubName) {
   try {
     const folder = FOLDERS.INFO_PACKS;
     const templateSpreadsheet = SPREADSHEETS.INFO_PACK_TEMPLATE;
-    const newSpreadsheet = duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
+    const newSpreadsheet = await duplicateTemplateSpreadsheet(templateSpreadsheet, clubName);
     const file = DriveApp.getFileById(newSpreadsheet.getId());
-    folder.addFile(file);
 
-    DriveApp.getRootFolder().removeFile(file);
+    await folder.addFile(file);
+    await DriveApp.getRootFolder().removeFile(file);
 
     return newSpreadsheet;
   } catch (error) {
@@ -84,13 +84,18 @@ function duplicateTemplateSpreadsheet(templateSpreadsheet, clubName) {
  * Deletes all sheets in a given folder.
  * @param {Object} folder - The folder to delete sheets from.
  */
-function deleteAllSheetsInFolder(folder) {
+async function deleteAllSheetsInFolder(folder) {
   const files = folder.getFiles();
+  const deletePromises = [];
+
   while (files.hasNext()) {
     const file = files.next();
-    file.setTrashed(true);
+    deletePromises.push(file.setTrashed(true));
   }
+
+  await Promise.all(deletePromises);
 }
+
 /**
  * Gets a sheet by name in a given spreadsheet.
  * @param {Object} spreadSheet - The spreadsheet to search within.

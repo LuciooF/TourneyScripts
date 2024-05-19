@@ -4,17 +4,19 @@
  * @param {Array} dataRows - The data to append.
  * @param {Array} headers - The headers for the data.
  */
-function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
+async function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
   const sheet = getSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
   const startRow = 5;
   const startColumn = 2;
+
   if (Array.isArray(dataRows) && dataRows.length) {
     const range = sheet.getRange(startRow + 1, startColumn, dataRows.length, headers.length);
-    range.setValues(dataRows);
+    await range.setValues(dataRows);
   } else {
     console.error('Invalid data format:', dataRows);
   }
 }
+
 /**
  * Fetches data from player and food form sheets.
  * @returns {Object} An object containing arrays of player and food data.
@@ -87,17 +89,35 @@ function constructRowData(playerRow, foodRow) {
  * Fetches data from sheets, processes it, and appends it to the club sheets.
  * Also updates the Lions Feed sheet with the compiled data. (It made sense to do it here as we are reusing the data)
  */
-function createClubSpreadsheets() {
-  const { playerData, foodData } = fetchDataFromSheets();
+async function createClubSpreadsheets() {
+  const { playerData, foodData } = await fetchDataFromSheets();
   const { clubData, lionsFeedData } = processClubData(playerData, foodData);
 
+  // Create Lions Feed Sheet without awaiting its completion
   createLionsFeedSheet(lionsFeedData);
-  const infoPacksFolder = FOLDERS.INFO_PACKS;
-  deleteAllSheetsInFolder(infoPacksFolder);
+  await deleteAllSheetsInFolder(FOLDERS.INFO_PACKS);
+
+  const clubRows = [];
+  const spreadsheetPromises = [];
+
   Object.keys(clubData).forEach(clubName => {
-    const spreadsheet = createClubSpreadsheet(clubName);
-    const headers = HEADERS.PLAYER_INFORMATION;
-    appendDataToPlayerDetailsSheet(spreadsheet, clubData[clubName], headers);
+    const createSpreadsheet = async () => {
+      const spreadsheet = await createClubSpreadsheet(clubName);
+      //might need to await this.
+      appendDataToPlayerDetailsSheet(spreadsheet, clubData[clubName], HEADERS.PLAYER_INFORMATION);
+      const playerCount = clubData[clubName].length;
+      const clubLink = `=HYPERLINK("${spreadsheet.getUrl()}", "${clubName} Sheet")`;
+      clubRows.push([clubName, playerCount, clubLink]);
+    };
+
+    spreadsheetPromises.push(createSpreadsheet());
   });
+
+  // Wait for all spreadsheets to be created and data appended
+  await Promise.all(spreadsheetPromises);
+
+  // Write all club data to the main sheet in one go
+  await writeDataToSheet(SHEETS.CLUB, clubRows, HEADERS.CLUB);
 }
+
 
