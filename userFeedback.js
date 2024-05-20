@@ -3,13 +3,12 @@
  * @param {string} currentStep - The current step of the process.
  * @param {string} message - The message to be displayed.
  */
-function updateStatus(currentStep, message) {
+function updateStatus(message) {
   const progressSheet = SHEETS.PROGRESS;
   const lastRow = progressSheet.getLastRow();
   const newRow = lastRow + 1;
-  const status = `${currentStep}: ${message}`;
 
-  progressSheet.getRange(`A${newRow}`).setValue(status).setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold");
+  progressSheet.getRange(`A${newRow}`).setValue(message).setFontColor(COLOR.BLACK).setFontSize(14).setFontWeight("bold");
   progressSheet.getRange(`B${newRow}`).setValue(new Date().toLocaleString('en-US', { hour12: false })).setFontColor(COLOR.BLACK).setFontSize(12);
   progressSheet.getRange(`C${newRow}`).setValue("Status: Done").setFontColor(COLOR.DARK_GREEN).setFontSize(12).setFontWeight("bold");
 }

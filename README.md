@@ -24,6 +24,7 @@
 - [x] [Add club sheets](https://github.com/LuciooF/Tourney2024Scripts/issues/15){15} 
 - [x] [Separate errors sheet ](https://github.com/LuciooF/Tourney2024Scripts/issues/17){17} 
 - [x] [Implement async functions to make asyncronous and faster, especially the club spreadsheets](https://github.com/LuciooF/Tourney2024Scripts/issues/18){18} 
+- [x] [Formalize Food Form data as it is currently bad.](https://github.com/LuciooF/Tourney2024Scripts/issues/19){19} 
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
 - [ ] [Create Food Master sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/5){5} 
 - [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 

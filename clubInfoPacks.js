@@ -112,12 +112,11 @@ async function createClubSpreadsheets() {
 
     spreadsheetPromises.push(createSpreadsheet());
   });
-
-  // Wait for all spreadsheets to be created and data appended
+  
   await Promise.all(spreadsheetPromises);
-
-  // Write all club data to the main sheet in one go
-  await writeDataToSheet(SHEETS.CLUB, clubRows, HEADERS.CLUB);
+  
+  writeDataToSheet(SHEETS.CLUB, clubRows, HEADERS.CLUB);
+  applyAlternatingRowStyles(SHEETS.CLUB);
 }
 
 

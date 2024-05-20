@@ -1,33 +1,32 @@
 /**
  * Main function that orchestrates the entire process.
- * Pretty much does everything in the prefered order.
+ * Pretty much does everything in the preferred order.
  * Fetches data from the CSV and Declaration sheets, processes the data, writes the processed data to the Master sheet, logs any errors, and updates the Club sheets.
  */
 function doEverythingButton() {
     try {
-        const csvSheet = SHEETS.SQUARE_CSV;
-        const playerSheet = SHEETS.PLAYER_MASTER;
-        const declarationSheet = SHEETS.DECLARATION_FORM;
         clearProgressSheet();
-        updateStatus("Starting Update", "Initializing the update process...");
-        const [csvData, declarationData] = fetchCsvAndDeclarationData(csvSheet, declarationSheet);
-        updateStatus("Fetching Data", "Retrieving data from Square CSV and Declaraion Form");
+        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        const [csvData, declarationData, foodFormData] = fetchAllData();
+        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
 
         const [dataToWrite, errorRows] = processCsvAndDeclarationData(csvData, declarationData);
-        updateStatus("Processing Data", "Formatting data for future use");
+        updateStatus(STATUS_MESSAGES.PROCESSING_DATA);
 
-        populatePlayerSheet(playerSheet, dataToWrite);
-        updateStatus("Populating Player sheet", "Populating the player sheet with processed data...");
+        populatePlayerSheet(dataToWrite);
+        updateStatus(STATUS_MESSAGES.POPULATING_PLAYER_SHEET);
 
         logUnfilledDeclarationsInSheet(errorRows);
-        updateStatus("Populating Missing Declarations Sheet", "Adding people who have an order but no declaration to the sheet...");
+        updateStatus(STATUS_MESSAGES.POPULATING_MISSING_DECLARATIONS_SHEET);
         highlightIncorrectOrderNumber(csvData, declarationData);
-        updateStatus("Populating Incorrect Order Number sheet", "Adding people who have a declaration with a order number we dont recognise");
+        updateStatus(STATUS_MESSAGES.POPULATING_INCORRECT_ORDER_NUMBER_SHEET);
 
         createClubSpreadsheets();
-        updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
+        updateStatus(STATUS_MESSAGES.CREATING_UPDATING_CLUB_SHEETS);
 
-        updateStatus("Update Complete", "All tasks completed successfully at " + new Date().toLocaleString('en-US', { hour12: false }));
+        populateFoodOrderComplete(foodFormData)
+        updateStatus(STATUS_MESSAGES.POPULATING_FOOD_ORDER_COMPLETE_SHEET);
+
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -35,21 +34,19 @@ function doEverythingButton() {
         logError(err);
     }
 }
+
 function populatePlayerSheetButton() {
     try {
-        const csvSheet = SHEETS.SQUARE_CSV;
-        const playerSheet = SHEETS.PLAYER_MASTER;
-        const declarationSheet = SHEETS.DECLARATION_FORM;
         clearProgressSheet();
-        updateStatus("Starting Update", "Initializing the update process...");
-        const [csvData, declarationData] = fetchCsvAndDeclarationData(csvSheet, declarationSheet);
-        updateStatus("Fetching Data", "Retrieving data from Square CSV and Declaraion Form");
+        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        const [csvData, declarationData, x] = fetchAllData();
+        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
 
         const [dataToWrite, _] = processCsvAndDeclarationData(csvData, declarationData);
-        updateStatus("Processing Data", "Formatting data for future use");
+        updateStatus(STATUS_MESSAGES.PROCESSING_DATA);
 
-        populatePlayerSheet(playerSheet, dataToWrite);
-        updateStatus("Populating Player sheet", "Populating the player sheet with processed data...");
+        populatePlayerSheet(dataToWrite);
+        updateStatus(STATUS_MESSAGES.POPULATING_PLAYER_SHEET);
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -57,20 +54,19 @@ function populatePlayerSheetButton() {
         logError(err);
     }
 }
+
 function populateUnfilledDeclarationsInSheetButton() {
     try {
-        const csvSheet = SHEETS.SQUARE_CSV;
-        const declarationSheet = SHEETS.DECLARATION_FORM;
         clearProgressSheet();
-        updateStatus("Starting Update", "Initializing the update process...");
-        const [csvData, declarationData] = fetchCsvAndDeclarationData(csvSheet, declarationSheet);
-        updateStatus("Fetching Data", "Retrieving data from Square CSV and Declaraion Form");
+        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        const [csvData, declarationData, x] = fetchAllData();
+        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
 
         const [_, errorRows] = processCsvAndDeclarationData(csvData, declarationData);
-        updateStatus("Processing Data", "Formatting data for future use");
+        updateStatus(STATUS_MESSAGES.PROCESSING_DATA);
 
         logUnfilledDeclarationsInSheet(errorRows);
-        updateStatus("Populating Missing Declarations Sheet", "Adding people who have an order but no declaration to the sheet...");
+        updateStatus(STATUS_MESSAGES.POPULATING_MISSING_DECLARATIONS_SHEET);
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -78,17 +74,16 @@ function populateUnfilledDeclarationsInSheetButton() {
         logError(err);
     }
 }
+
 function populateIncorrectOrderNumberSheetButton() {
     try {
-        const csvSheet = SHEETS.SQUARE_CSV;
-        const declarationSheet = SHEETS.DECLARATION_FORM;
         clearProgressSheet();
-        updateStatus("Starting Update", "Initializing the update process...");
-        const [csvData, declarationData] = fetchCsvAndDeclarationData(csvSheet, declarationSheet);
-        updateStatus("Fetching Data", "Retrieving data from Square CSV and Declaraion Form");
+        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        const [csvData, declarationData, _] = fetchAllData();
+        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
 
         highlightIncorrectOrderNumber(csvData, declarationData);
-        updateStatus("Populating Incorrect Order Number sheet", "Adding people who have a declaration with a order number we dont recognise");
+        updateStatus(STATUS_MESSAGES.POPULATING_INCORRECT_ORDER_NUMBER_SHEET);
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -96,12 +91,28 @@ function populateIncorrectOrderNumberSheetButton() {
         logError(err);
     }
 }
+
 function createClubSpreadsheetsButton() {
     try {
         clearProgressSheet();
-        updateStatus("Starting Update", "Initializing the update process...");
+        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
         createClubSpreadsheets();
-        updateStatus("Creating/Updating Club Sheets", "Sheets being updated");
+        updateStatus(STATUS_MESSAGES.CREATING_UPDATING_CLUB_SHEETS);
+        addSuccessfullRunStatus();
+    }
+    catch (err) {
+        console.log("Error", err);
+        logError(err);
+    }
+}
+
+function populateFoodOrderCompleteButton() {
+    try {
+        clearProgressSheet();
+        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        const [_, _1, foodFormData] = fetchAllData();
+        populateFoodOrderComplete(foodFormData)
+        updateStatus(STATUS_MESSAGES.POPULATING_FOOD_ORDER_COMPLETE_SHEET);
         addSuccessfullRunStatus();
     }
     catch (err) {

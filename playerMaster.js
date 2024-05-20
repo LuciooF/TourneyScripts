@@ -5,10 +5,15 @@
  * @param {Object} declarationSheet - The declaration sheet object.
  * @returns {Array} An array containing the CSV data and the declaration data.
  */
-function fetchCsvAndDeclarationData(csvSheet, declarationSheet) {
-  const csvData = csvSheet.getRange(2, 1, csvSheet.getLastRow() - 1, csvSheet.getLastColumn()).getValues();
-  const declarationData = declarationSheet.getRange(2, 1, declarationSheet.getLastRow() - 1, 5).getValues();
-  return [csvData, declarationData];
+function fetchAllData() {
+  const csvSheet = SHEETS.SQUARE_CSV;
+  const declarationSheet = SHEETS.DECLARATION_FORM;
+  const foodFormSheet = SHEETS.FOOD_FORM;
+  const csvData = SHEETS.SQUARE_CSV.getRange(2, 1, csvSheet.getLastRow() - 1, csvSheet.getLastColumn()).getValues();
+  const declarationData = SHEETS.DECLARATION_FORM.getRange(2, 1, declarationSheet.getLastRow() - 1, 5).getValues();
+  const foodData = SHEETS.FOOD_FORM.getRange(2, 1, foodFormSheet.getLastRow() - 1, 11).getValues();
+  
+  return [csvData, declarationData, foodData];
 }
 /**
  * Processes data from CSV and declaration sheets.
@@ -69,7 +74,8 @@ function constructRowFromData(csvRow, declarationRow) {
  * @param {Object} masterSheet - The master sheet object.
  * @param {Array} dataToWrite - The data to write.
  */
-function populatePlayerSheet(playerSheet, dataToWrite) {
+function populatePlayerSheet(dataToWrite) {
+  const playerSheet= SHEETS.PLAYER_MASTER;
   dataToWrite.sort((a, b) => a[7].localeCompare(b[7]));
   playerSheet.clear();
   writeDataToSheet(playerSheet, dataToWrite, HEADERS.MASTER_SHEET);
