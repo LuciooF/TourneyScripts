@@ -58,16 +58,11 @@ Apart from populating the above sheets, the script performs the following tasks:
   - Sheets for timings, questions, etc.
   - These spreadsheets are stored inside the [Info Packs folder](https://drive.google.com/drive/u/3/folders/1Dalx4D3USf-ojXkyrCOCFQcCNHbY54kl), and sent to each club's coordinator.
 
-- **Lions Sheet**: A separate sheet is populated for the Lions, providing:
+- **Lions Sheet**: A separate sheet is populated for Lions, providing:
   - A list of attending players.
   - Player count.
   - Food choices and dietary requirements.
   - This will be [its own spreadsheet](https://docs.google.com/spreadsheets/d/1RzFE8XkP6VL0ykOUTTWIliFHmlbwPpNOLYgdsrvrepA/edit#gid=1448082000) as we need to give this to the club
-
-## Usage
-
-To utilize these scripts, simply open the [Google Sheets document](https://docs.google.com/spreadsheets/d/1lJ14WTWZRBPJRKZR8p7cWpdjfY9faKZyVgPJuMcxLkI/edit#gid=674535903) and use the provided buttons to process the data. Ensure all necessary forms are filled and data is up-to-date to avoid discrepancies.
-
 
 ## TODO List
 
@@ -98,4 +93,4 @@ To utilize these scripts, simply open the [Google Sheets document](https://docs.
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
 - [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 
-- [ ] [Make sure making this repo is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
+- [ ] [Make sure making this repo public is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
