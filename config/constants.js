@@ -82,7 +82,9 @@ const COLOR = Object.freeze({
     BLACK: '#000000',
     SALMON: 'ffab91',
     RED: '#ff0000',
-    LAVENDER: '#CBC3E3'
+    LAVENDER: '#CBC3E3',
+    ORANGE: '#FFA500',
+    BLUE: '#0000FF'
 });
 
 const STATUS_MESSAGES = Object.freeze({
@@ -94,4 +96,8 @@ const STATUS_MESSAGES = Object.freeze({
     POPULATING_INCORRECT_ORDER_NUMBER_SHEET: "Populating Incorrect Order Number sheet - Adding people who have a declaration with a order number we don't recognise",
     CREATING_UPDATING_CLUB_SHEETS: "Creating/Updating Club Sheets - Sheets being updated",
     POPULATING_FOOD_ORDER_COMPLETE_SHEET: "Populating Food Order Complete sheet - Adding people who have completed their food declaration"
+});
+
+const FONTS = Object.freeze({
+    BOLD: "bold",
 });

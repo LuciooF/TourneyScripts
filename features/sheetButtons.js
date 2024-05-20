@@ -4,30 +4,19 @@
  * writes the processed data to the Master sheet, logs any errors, and updates the Club sheets.
  * @function doEverythingButton
  */
-function doEverythingButton() {
+async function doEverythingButton() {
     try {
         clearProgressSheet();
-        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+
+        setTaskToProcessing(STATUS_MESSAGES.STARTING_UPDATE);
+        setLastTaskToDone();
         const [csvData, declarationData, foodFormData] = fetchAllData();
-        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
-
         const [dataToWrite, errorRows] = processCsvAndDeclarationData(csvData, declarationData);
-        updateStatus(STATUS_MESSAGES.PROCESSING_DATA);
-
         populatePlayerSheet(dataToWrite);
-        updateStatus(STATUS_MESSAGES.POPULATING_PLAYER_SHEET);
-
         logUnfilledDeclarationsInSheet(errorRows);
-        updateStatus(STATUS_MESSAGES.POPULATING_MISSING_DECLARATIONS_SHEET);
         highlightIncorrectOrderNumber(csvData, declarationData);
-        updateStatus(STATUS_MESSAGES.POPULATING_INCORRECT_ORDER_NUMBER_SHEET);
-
-        createClubSpreadsheets();
-        updateStatus(STATUS_MESSAGES.CREATING_UPDATING_CLUB_SHEETS);
-
+        await createClubSpreadsheets();
         populateFoodOrderComplete(foodFormData)
-        updateStatus(STATUS_MESSAGES.POPULATING_FOOD_ORDER_COMPLETE_SHEET);
-
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -42,15 +31,15 @@ function doEverythingButton() {
 function populatePlayerSheetButton() {
     try {
         clearProgressSheet();
-        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        setTaskToProcessing(STATUS_MESSAGES.STARTING_UPDATE);
+        setLastTaskToDone();
+
         const [csvData, declarationData, x] = fetchAllData();
-        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
 
         const [dataToWrite, _] = processCsvAndDeclarationData(csvData, declarationData);
-        updateStatus(STATUS_MESSAGES.PROCESSING_DATA);
 
         populatePlayerSheet(dataToWrite);
-        updateStatus(STATUS_MESSAGES.POPULATING_PLAYER_SHEET);
+
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -65,15 +54,13 @@ function populatePlayerSheetButton() {
 function populateUnfilledDeclarationsInSheetButton() {
     try {
         clearProgressSheet();
-        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        setTaskToProcessing(STATUS_MESSAGES.STARTING_UPDATE);
+        setLastTaskToDone();
+
         const [csvData, declarationData, x] = fetchAllData();
-        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
 
         const [_, errorRows] = processCsvAndDeclarationData(csvData, declarationData);
-        updateStatus(STATUS_MESSAGES.PROCESSING_DATA);
-
         logUnfilledDeclarationsInSheet(errorRows);
-        updateStatus(STATUS_MESSAGES.POPULATING_MISSING_DECLARATIONS_SHEET);
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -88,12 +75,11 @@ function populateUnfilledDeclarationsInSheetButton() {
 function populateIncorrectOrderNumberSheetButton() {
     try {
         clearProgressSheet();
-        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
-        const [csvData, declarationData, _] = fetchAllData();
-        updateStatus(STATUS_MESSAGES.FETCHING_DATA);
+        setTaskToProcessing(STATUS_MESSAGES.STARTING_UPDATE);
+        setLastTaskToDone();
 
+        const [csvData, declarationData, _] = fetchAllData();
         highlightIncorrectOrderNumber(csvData, declarationData);
-        updateStatus(STATUS_MESSAGES.POPULATING_INCORRECT_ORDER_NUMBER_SHEET);
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -105,12 +91,13 @@ function populateIncorrectOrderNumberSheetButton() {
  * Creates or updates Club spreadsheets.
  * @function createClubSpreadsheetsButton
  */
-function createClubSpreadsheetsButton() {
+async function createClubSpreadsheetsButton() {
     try {
         clearProgressSheet();
-        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
-        createClubSpreadsheets();
-        updateStatus(STATUS_MESSAGES.CREATING_UPDATING_CLUB_SHEETS);
+        setTaskToProcessing(STATUS_MESSAGES.STARTING_UPDATE);
+        setLastTaskToDone();
+
+        await createClubSpreadsheets()
         addSuccessfullRunStatus();
     }
     catch (err) {
@@ -125,10 +112,11 @@ function createClubSpreadsheetsButton() {
 function populateFoodOrderCompleteButton() {
     try {
         clearProgressSheet();
-        updateStatus(STATUS_MESSAGES.STARTING_UPDATE);
+        setTaskToProcessing(STATUS_MESSAGES.STARTING_UPDATE);
+        setLastTaskToDone();
+
         const [_, _1, foodFormData] = fetchAllData();
-        populateFoodOrderComplete(foodFormData)
-        updateStatus(STATUS_MESSAGES.POPULATING_FOOD_ORDER_COMPLETE_SHEET);
+        populateFoodOrderComplete(foodFormData);
         addSuccessfullRunStatus();
     }
     catch (err) {
