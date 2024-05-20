@@ -64,6 +64,9 @@ Apart from populating the above sheets, the script performs the following tasks:
   - Food choices and dietary requirements.
   - This will be [its own spreadsheet](https://docs.google.com/spreadsheets/d/1RzFE8XkP6VL0ykOUTTWIliFHmlbwPpNOLYgdsrvrepA/edit#gid=1448082000) as we need to give this to the club
 
+## Contributions
+To contribute I have set this repo up so all you have to do is fork this, create a new branch for whatever fix you're making, then once this is done, create a merge request. Only I can approve them. :D
+
 ## TODO List
 
 - [x] Try out eslint
@@ -94,4 +97,5 @@ Apart from populating the above sheets, the script performs the following tasks:
 - [x] [Make sure making this repo public is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
 - [x] [Create folders to make it a bit easier on the eye](https://github.com/LuciooF/Tourney2024Scripts/issues/21){21} 
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
-- [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 
+- [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14}
+- [ ] [Add slightly better error handling](https://github.com/LuciooF/TourneyScripts/issues/22)
