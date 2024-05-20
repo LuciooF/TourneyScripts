@@ -14,6 +14,7 @@
 - [x] [Text/Background colours being used in magic strings](https://github.com/LuciooF/Tourney2024Scripts/issues/1){1} 
 - [x] [Clearing player sheet clears the whole sheet and the formatting](https://github.com/LuciooF/Tourney2024Scripts/issues/2){2} 
 - [x] [Lions sheet not being properly cleared / count in wrong place](https://github.com/LuciooF/Tourney2024Scripts/issues/3){3} 
+- [x] [Create Food Master sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/5){5} 
 - [x] [Write explanation for the "complicated" functions](https://github.com/LuciooF/Tourney2024Scripts/issues/7){7} 
 - [x] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8){8} 
 - [x] [Look into creating proper classes for data sets](https://github.com/LuciooF/Tourney2024Scripts/issues/9){9} 
@@ -27,6 +28,5 @@
 - [x] [Implement async functions to make asyncronous and faster, especially the club spreadsheets](https://github.com/LuciooF/Tourney2024Scripts/issues/18){18} 
 - [x] [Formalize Food Form data as it is currently bad.](https://github.com/LuciooF/Tourney2024Scripts/issues/19){19} 
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
-- [ ] [Create Food Master sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/5){5} 
 - [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 
