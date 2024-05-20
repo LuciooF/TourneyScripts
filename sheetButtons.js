@@ -1,7 +1,8 @@
 /**
  * Main function that orchestrates the entire process.
- * Pretty much does everything in the preferred order.
- * Fetches data from the CSV and Declaration sheets, processes the data, writes the processed data to the Master sheet, logs any errors, and updates the Club sheets.
+ * Fetches data from the CSV and Declaration sheets, processes the data,
+ * writes the processed data to the Master sheet, logs any errors, and updates the Club sheets.
+ * @function doEverythingButton
  */
 function doEverythingButton() {
     try {
@@ -34,7 +35,10 @@ function doEverythingButton() {
         logError(err);
     }
 }
-
+/**
+ * Populates the Player sheet with processed data from CSV and Declaration sheets.
+ * @function populatePlayerSheetButton
+ */
 function populatePlayerSheetButton() {
     try {
         clearProgressSheet();
@@ -54,7 +58,10 @@ function populatePlayerSheetButton() {
         logError(err);
     }
 }
-
+/**
+ * Logs unfilled declarations in a designated sheet.
+ * @function populateUnfilledDeclarationsInSheetButton
+ */
 function populateUnfilledDeclarationsInSheetButton() {
     try {
         clearProgressSheet();
@@ -74,7 +81,10 @@ function populateUnfilledDeclarationsInSheetButton() {
         logError(err);
     }
 }
-
+/**
+ * Highlights missing declarations in the 'Errors' sheet.
+ * @function populateIncorrectOrderNumberSheetButton
+ */
 function populateIncorrectOrderNumberSheetButton() {
     try {
         clearProgressSheet();
@@ -91,7 +101,10 @@ function populateIncorrectOrderNumberSheetButton() {
         logError(err);
     }
 }
-
+/**
+ * Creates or updates Club spreadsheets.
+ * @function createClubSpreadsheetsButton
+ */
 function createClubSpreadsheetsButton() {
     try {
         clearProgressSheet();
@@ -105,7 +118,10 @@ function createClubSpreadsheetsButton() {
         logError(err);
     }
 }
-
+/**
+ * Populates the Food Order Complete sheet with data from the Food Form.
+ * @function populateFoodOrderCompleteButton
+ */
 function populateFoodOrderCompleteButton() {
     try {
         clearProgressSheet();

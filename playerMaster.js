@@ -1,9 +1,7 @@
-
 /**
- * Fetches data from CSV and declaration sheets.
- * @param {Object} csvSheet - The CSV sheet object.
- * @param {Object} declarationSheet - The declaration sheet object.
- * @returns {Array} An array containing the CSV data and the declaration data.
+ * Fetches data from CSV, declaration, and food form sheets.
+ * @function fetchAllData
+ * @returns {Array} An array containing the CSV data, the declaration data, and the food form data.
  */
 function fetchAllData() {
   const csvSheet = SHEETS.SQUARE_CSV;
@@ -17,6 +15,7 @@ function fetchAllData() {
 }
 /**
  * Processes data from CSV and declaration sheets.
+ * @function processCsvAndDeclarationData
  * @param {Array} csvData - The CSV data.
  * @param {Array} declarationData - The declaration data.
  * @returns {Array} An array containing the data to write and the error rows.
@@ -35,6 +34,7 @@ function processCsvAndDeclarationData(csvData, declarationData) {
 }
 /**
  * Creates a map from declaration data.
+ * @function createDeclarationMap
  * @param {Array} declarationData - The declaration data.
  * @returns {Map} The declaration map.
  */
@@ -42,7 +42,8 @@ function createDeclarationMap(declarationData) {
   return new Map(declarationData.map(row => [normalizeOrderNumber(row[1]), row]));
 }
 /**
- * Generates a data row from CSV data using declaration map.
+ * Generates a data row from CSV data using a declaration map.
+ * @function createRowFromCsvData
  * @param {Array} row - The CSV row.
  * @param {Map} declarationMap - The declaration map.
  * @returns {Array} An array containing a boolean indicating if the row is valid and the new row.
@@ -54,7 +55,8 @@ function createRowFromCsvData(row, declarationMap) {
   return [!!declarationRow, newRow];
 }
 /**
- * Constructs a row for master sheet from CSV and declaration data.
+ * Constructs a row for the master sheet from CSV and declaration data.
+ * @function constructRowFromData
  * @param {Array} csvRow - The CSV row.
  * @param {Array} declarationRow - The declaration row.
  * @returns {Array} The constructed row.
@@ -70,8 +72,8 @@ function constructRowFromData(csvRow, declarationRow) {
   ];
 }
 /**
- * Write data rows to the Master sheet with alternating colors.
- * @param {Object} masterSheet - The master sheet object.
+ * Writes data rows to the master sheet with alternating colors.
+ * @function populatePlayerSheet
  * @param {Array} dataToWrite - The data to write.
  */
 function populatePlayerSheet(dataToWrite) {
@@ -84,6 +86,7 @@ function populatePlayerSheet(dataToWrite) {
 
 /**
  * Logs errors in a designated 'Errors' sheet.
+ * @function logUnfilledDeclarationsInSheet
  * @param {Array} errorRows - The error rows.
  */
 function logUnfilledDeclarationsInSheet(errorRows) {
@@ -97,6 +100,7 @@ function logUnfilledDeclarationsInSheet(errorRows) {
 }
 /**
  * Highlights missing declarations in the 'Errors' sheet.
+ * @function highlightIncorrectOrderNumber
  * @param {Array} csvData - The CSV data.
  * @param {Array} declarationData - The declaration data.
  */

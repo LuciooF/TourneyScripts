@@ -1,3 +1,6 @@
+//To run this just do node update-readme.mjs in the terminal
+//All this does is look a the GH issues (If you were to have the .env file with the GH_TOKEN) and then update the README.md file with the issues
+//Just did it for funsies.
 import fs from 'fs';
 import { request } from '@octokit/request';
 import fetch from 'node-fetch';

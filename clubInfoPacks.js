@@ -1,8 +1,8 @@
 /**
- * Appends data to the "Player Details" sheet within a given spreadsheet.
- * @param {Object} spreadsheet - The spreadsheet to append data to.
- * @param {Array} dataRows - The data to append.
- * @param {Array} headers - The headers for the data.
+ * Appends data to the "Player Details" sheet in a spreadsheet.
+ * @param {Object} spreadsheet - Spreadsheet to append data to.
+ * @param {Array} dataRows - Data to append.
+ * @param {Array} headers - Headers for the data.
  */
 async function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
   const sheet = getSheetByName(spreadsheet, SHEET_NAMES.PLAYER_DETAILS);
@@ -18,8 +18,8 @@ async function appendDataToPlayerDetailsSheet(spreadsheet, dataRows, headers) {
 }
 
 /**
- * Fetches data from player and food form sheets.
- * @returns {Object} An object containing arrays of player and food data.
+ * Retrieves player and food data from sheets.
+ * @returns {Object} Object with arrays of player and food data.
  */
 function fetchDataFromSheets() {
   const playerData = SHEETS.PLAYER_MASTER.getDataRange().getValues();
@@ -28,10 +28,10 @@ function fetchDataFromSheets() {
 }
 
 /**
- * Processes player and food data into structured club data and lions feed data.
- * @param {Array} playerData - The data about players.
- * @param {Array} foodData - The data about food.
- * @returns {Object} An object containing club data and lions feed data.
+ * Transforms player and food data into club and lions feed data.
+ * @param {Array} playerData - Player data.
+ * @param {Array} foodData - Food data.
+ * @returns {Object} Object with club data and lions feed data.
  */
 function processClubData(playerData, foodData) {
   const foodMap = mapFoodData(foodData);
@@ -39,9 +39,9 @@ function processClubData(playerData, foodData) {
   return { clubData, lionsFeedData };
 }
 /**
- * Maps food form data into a Map object.
- * @param {Array} foodData - The data about food.
- * @returns {Map} A Map where each key-value pair represents a row of food data.
+ * Converts food data into a Map object.
+ * @param {Array} foodData - Food data.
+ * @returns {Map} Map with key-value pairs representing food data rows.
  */
 function mapFoodData(foodData) {
   const foodMap = new Map();
@@ -49,10 +49,10 @@ function mapFoodData(foodData) {
   return foodMap;
 }
 /**
- * Compiles club data and lions feed data.
- * @param {Array} playerData - The data about players.
- * @param {Map} foodMap - A Map of food data.
- * @returns {Object} An object containing club data and lions feed data.
+ * Assembles club and lions feed data.
+ * @param {Array} playerData - Player data.
+ * @param {Map} foodMap - Map of food data.
+ * @returns {Object} Object with club data and lions feed data.
  */
 function compileClubData(playerData, foodMap) {
   const clubData = {};
@@ -71,10 +71,10 @@ function compileClubData(playerData, foodMap) {
 }
 
 /**
- * Constructs a single row of club data.
- * @param {Array} playerRow - A row of player data.
- * @param {Array} foodRow - A row of food data.
- * @returns {Array} An array representing a row of club data.
+ * Creates a single row of club data.
+ * @param {Array} playerRow - Player data row.
+ * @param {Array} foodRow - Food data row.
+ * @returns {Array} Array representing a row of club data.
  */
 function constructRowData(playerRow, foodRow) {
   return [
@@ -85,9 +85,8 @@ function constructRowData(playerRow, foodRow) {
 }
 
 /**
- * Updates all club sheets with the compiled data.
- * Fetches data from sheets, processes it, and appends it to the club sheets.
- * Also updates the Lions Feed sheet with the compiled data. (It made sense to do it here as we are reusing the data)
+ * Updates club sheets with compiled data and updates the Lions Feed sheet.
+ * Fetches, processes, and appends data to the club sheets.
  */
 async function createClubSpreadsheets() {
   const { playerData, foodData } = await fetchDataFromSheets();
@@ -112,7 +111,7 @@ async function createClubSpreadsheets() {
 
     spreadsheetPromises.push(createSpreadsheet());
   });
-  
+
   await Promise.all(spreadsheetPromises);
   
   writeDataToSheet(SHEETS.CLUB, clubRows, HEADERS.CLUB);

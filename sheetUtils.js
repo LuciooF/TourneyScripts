@@ -1,8 +1,9 @@
 /**
  * Gets or creates a sheet by name in a given spreadsheet.
+ * @function getOrCreateSheetByName
  * @param {Object} spreadsheet - The spreadsheet to search in.
  * @param {string} sheetName - The name of the sheet.
- * @param {Array} headers - The headers to append if a new sheet is created.
+ * @param {Array} [headers=null] - The headers to append if a new sheet is created.
  * @returns {Object} The sheet.
  */
 function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
@@ -23,6 +24,7 @@ function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
 }
 /**
  * Gets a sheet by name in a given spreadsheet.
+ * @function getSheetByName
  * @param {Object} spreadsheet - The spreadsheet to search in.
  * @param {string} sheetName - The name of the sheet.
  * @returns {Object} The sheet.
@@ -37,6 +39,7 @@ function getSheetByName(spreadsheet, sheetName) {
 }
 /**
  * Clears the content of a sheet starting from a specific row.
+ * @function clearSheetContent
  * @param {Object} sheet - The sheet to clear.
  */
 function clearSheetContent(sheet) {
@@ -53,6 +56,7 @@ function clearSheetContent(sheet) {
 }
 /**
  * Appends a value to a cell in a sheet and sets the font size and weight.
+ * @function appendValueToCell
  * @param {Object} sheet - The sheet to append to.
  * @param {*} value - The value to append.
  * @param {string} cell - The cell to append to.
@@ -74,6 +78,7 @@ function appendValueToCell(sheet, value, cell, fontSize, isBold) {
 }
 /**
  * Normalizes an order number by removing non-digit characters from the start.
+ * @function normalizeOrderNumber
  * @param {string} orderNumber - The order number to normalize.
  * @returns {string} The normalized order number.
  */
@@ -82,6 +87,7 @@ function normalizeOrderNumber(orderNumber) {
 }
 /**
  * Extracts necessary values from a CSV row based on specific indices.
+ * @function extractCsvValues
  * @param {Array} csvRow - The CSV row to extract values from.
  * @returns {Array} An array of extracted values.
  */
@@ -100,6 +106,7 @@ function extractCsvValues(csvRow) {
 }
 /**
  * Write data rows to a specified sheet with alternating colors.
+ * @function writeDataToSheet
  * @param {Object} sheet - The sheet object.
  * @param {Array} dataToWrite - The data to write.
  * @param {Array} [headers] - The headers for the data. If not provided, it assumes headers are already in the sheet.
@@ -126,6 +133,7 @@ function writeDataToSheet(sheet, dataToWrite, headers) {
 }
 /**
  * Apply alternating row styles to all populated rows, ignoring the header row.
+ * @function applyAlternatingRowStyles
  * @param {Object} sheet - The sheet object.
  */
 function applyAlternatingRowStyles(sheet) {
@@ -139,6 +147,7 @@ function applyAlternatingRowStyles(sheet) {
 }
 /**
  * Append headers to the first row of a specified sheet with styling.
+ * @function clearAndAppendHeaders
  * @param {Object} sheet - The sheet object.
  * @param {Array} headers - The headers to append.
  */
