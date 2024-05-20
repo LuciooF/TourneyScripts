@@ -78,6 +78,7 @@ Apart from populating the above sheets, the script performs the following tasks:
 - [x] [Clearing player sheet clears the whole sheet and the formatting](https://github.com/LuciooF/Tourney2024Scripts/issues/2){2} 
 - [x] [Lions sheet not being properly cleared / count in wrong place](https://github.com/LuciooF/Tourney2024Scripts/issues/3){3} 
 - [x] [Create Food Master sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/5){5} 
+- [x] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 
 - [x] [Write explanation for the "complicated" functions](https://github.com/LuciooF/Tourney2024Scripts/issues/7){7} 
 - [x] [Cleanup innecessary comments](https://github.com/LuciooF/Tourney2024Scripts/issues/8){8} 
 - [x] [Look into creating proper classes for data sets](https://github.com/LuciooF/Tourney2024Scripts/issues/9){9} 
@@ -90,7 +91,6 @@ Apart from populating the above sheets, the script performs the following tasks:
 - [x] [Separate errors sheet ](https://github.com/LuciooF/Tourney2024Scripts/issues/17){17} 
 - [x] [Implement async functions to make asyncronous and faster, especially the club spreadsheets](https://github.com/LuciooF/Tourney2024Scripts/issues/18){18} 
 - [x] [Formalize Food Form data as it is currently bad.](https://github.com/LuciooF/Tourney2024Scripts/issues/19){19} 
+- [x] [Make sure making this repo public is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
-- [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 
-- [ ] [Make sure making this repo public is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
