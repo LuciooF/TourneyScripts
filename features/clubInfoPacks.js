@@ -89,6 +89,7 @@ function constructRowData(playerRow, foodRow) {
  * Fetches, processes, and appends data to the club sheets.
  */
 async function createClubSpreadsheets() {
+  setTaskToProcessing(STATUS_MESSAGES.CREATING_UPDATING_CLUB_SHEETS, FOLDERS.INFO_PACKS.getUrl());
   const { playerData, foodData } = await fetchDataFromSheets();
   const { clubData, lionsFeedData } = processClubData(playerData, foodData);
 
@@ -116,6 +117,7 @@ async function createClubSpreadsheets() {
   
   writeDataToSheet(SHEETS.CLUB, clubRows, HEADERS.CLUB);
   applyAlternatingRowStyles(SHEETS.CLUB);
+  setLastTaskToDone();
 }
 
 

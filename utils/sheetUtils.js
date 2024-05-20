@@ -7,19 +7,10 @@
  * @returns {Object} The sheet.
  */
 function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
-  let sheet = spreadsheet.getSheetByName(sheetName);
-  if (!sheet) {
-    sheet = spreadsheet.insertSheet(sheetName);
-    if (headers != null) {
-      sheet.appendRow(headers);
-    }
-  }
-  else {
-    sheet.clear();
-    if (headers != null) {
-      sheet.appendRow(headers);
-    }
-  }
+  if (!spreadsheet) throw new Error(`Invalid spreadsheet object when passing ${sheetName} and ${headers}`);
+  let sheet = spreadsheet.getSheetByName(sheetName) || spreadsheet.insertSheet(sheetName);
+  sheet.clear();
+  if (headers) sheet.appendRow(headers);
   return sheet;
 }
 /**
@@ -31,10 +22,9 @@ function getOrCreateSheetByName(spreadsheet, sheetName, headers = null) {
  * @throws {Error} If no sheet is found with the given name.
  */
 function getSheetByName(spreadsheet, sheetName) {
+  if (!spreadsheet) throw new Error(`Invalid spreadsheet object when passing ${sheetName}`);
   let sheet = spreadsheet.getSheetByName(sheetName);
-  if (!sheet) {
-    throw Error("No sheet found in spreadsheet " + spreadsheet.getName() + " with name " + sheetName);
-  }
+  if (!sheet) throw new Error(`No sheet found in ${spreadsheet.getName()} with the name ${sheetName}`);
   return sheet;
 }
 /**
@@ -43,6 +33,7 @@ function getSheetByName(spreadsheet, sheetName) {
  * @param {Object} sheet - The sheet to clear.
  */
 function clearSheetContent(sheet) {
+  if (!sheet) throw new Error('Can\'t clear content of undefined sheet.'); 
   const startRow = 6;
   const lastRow = sheet.getLastRow();
   const lastCol = sheet.getLastColumn();
@@ -64,17 +55,12 @@ function clearSheetContent(sheet) {
  * @param {boolean} isBold - Whether the font weight should be bold.
  */
 function appendValueToCell(sheet, value, cell, fontSize, isBold) {
+  if (!sheet) throw new Error('Can\'t append the following values to undefined sheet, cell: ' + cell + ', value: ' + value); 
   const cellRange = sheet.getRange(cell);
   cellRange.clearContent();
   cellRange.setValue(value);
-  if (fontSize) {
-    cellRange.setFontSize(fontSize);
-  }
-  if (isBold) {
-    cellRange.setFontWeight("bold");
-  } else {
-    cellRange.setFontWeight("normal");
-  }
+  if (fontSize) cellRange.setFontSize(fontSize);   
+  if (isBold) cellRange.setFontWeight(FONTS.BOLD);
 }
 /**
  * Normalizes an order number by removing non-digit characters from the start.
@@ -112,6 +98,7 @@ function extractCsvValues(csvRow) {
  * @param {Array} [headers] - The headers for the data. If not provided, it assumes headers are already in the sheet.
  */
 function writeDataToSheet(sheet, dataToWrite, headers) {
+  if (!sheet) throw new Error('Can\'t write data following to undefined sheet, dataToWrite: ' + dataToWrite); 
   if (Array.isArray(dataToWrite) && dataToWrite.length) {
     let startRow = 2;
 
@@ -125,10 +112,8 @@ function writeDataToSheet(sheet, dataToWrite, headers) {
 
     const range = sheet.getRange(startRow, startColumn, numRows, numColumns);
     range.setValues(dataToWrite);
-  }
-  else {
-    console.error('Invalid data format:', dataToWrite);
-    throw Error('Invalid data format' + dataToWrite);
+  } else {
+    throw new Error('Invalid data format');
   }
 }
 /**
@@ -137,6 +122,7 @@ function writeDataToSheet(sheet, dataToWrite, headers) {
  * @param {Object} sheet - The sheet object.
  */
 function applyAlternatingRowStyles(sheet) {
+  if (!sheet) throw new Error('Can\'t apply alternating row styles to undefined sheet.'); 
   const lastRow = sheet.getLastRow();
   const lastColumn = sheet.getLastColumn();
 
@@ -152,11 +138,15 @@ function applyAlternatingRowStyles(sheet) {
  * @param {Array} headers - The headers to append.
  */
 function clearAndAppendHeaders(sheet, headers) {
+  if (!sheet) throw new Error('Can\'t append headers to undefined sheet.'); 
   sheet.clear();
   sheet.appendRow(headers);
 
-  const headerRange = sheet.getRange(1, 1, 1, headers.length);
-  headerRange.setFontWeight("bold")
+  sheet.getRange(1, 1, 1, headers.length)
+    .setFontWeight(FONTS.BOLD)
     .setBackground(COLOR.LIGHT_GREEN)
     .setFontColor(COLOR.WHITE);
+}
+function getActualSheetUrl(sheet){
+  return `${sheet.getParent().getUrl()}#gid=${sheet.getSheetId()}`;
 }

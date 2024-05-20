@@ -39,8 +39,7 @@ async function createClubSpreadsheet(clubName) {
 
     return newSpreadsheet;
   } catch (error) {
-    console.error("Error in createClubSpreadsheet: " + error);
-    throw error;
+    throw new Error("Error in createClubSpreadsheet: " + error);
   }
 }
 
@@ -51,16 +50,20 @@ async function createClubSpreadsheet(clubName) {
  * @returns {Object} The existing or newly created spreadsheet object.
  */
 function getOrCreateSpreadsheet(spreadsheetName, folder) {
-  const existingFiles = folder.getFilesByName(spreadsheetName);
+  try {
+    const existingFiles = folder.getFilesByName(spreadsheetName);
 
-  if (existingFiles.hasNext()) {
-    return SpreadsheetApp.open(existingFiles.next());
-  } else {
-    const newSpreadsheet = SpreadsheetApp.create(spreadsheetName);
-    const file = DriveApp.getFileById(newSpreadsheet.getId());
-    folder.addFile(file);
-    DriveApp.getRootFolder().removeFile(file);
-    return newSpreadsheet;
+    if (existingFiles.hasNext()) {
+      return SpreadsheetApp.open(existingFiles.next());
+    } else {
+      const newSpreadsheet = SpreadsheetApp.create(spreadsheetName);
+      const file = DriveApp.getFileById(newSpreadsheet.getId());
+      folder.addFile(file);
+      DriveApp.getRootFolder().removeFile(file);
+      return newSpreadsheet;
+    }
+  } catch (error) {
+    throw new Error("Error in getOrCreateSpreadsheet: " + error);
   }
 }
 
@@ -79,8 +82,7 @@ function duplicateTemplateSpreadsheet(templateSpreadsheet, clubName) {
 
     return newSpreadsheet;
   } catch (error) {
-    console.error("Error in duplicateTemplateSpreadsheet: " + error);
-    throw error;
+    throw new Error("Error in duplicateTemplateSpreadsheet: " + error);
   }
 }
 
@@ -89,15 +91,21 @@ function duplicateTemplateSpreadsheet(templateSpreadsheet, clubName) {
  * @param {Object} folder - The folder to delete sheets from.
  */
 async function deleteAllSheetsInFolder(folder) {
-  const files = folder.getFiles();
-  const deletePromises = [];
+  if (!folder) throw new Error('Invalid folder object');
+  
+  try {
+    const files = folder.getFiles();
+    const deletePromises = [];
 
-  while (files.hasNext()) {
-    const file = files.next();
-    deletePromises.push(file.setTrashed(true));
+    while (files.hasNext()) {
+      const file = files.next();
+      deletePromises.push(file.setTrashed(true));
+    }
+
+    await Promise.all(deletePromises);
+  } catch (error) {
+    throw new Error("Error in deleteAllSheetsInFolder: " + error);
   }
-
-  await Promise.all(deletePromises);
 }
 
 /**
