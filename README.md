@@ -70,7 +70,7 @@ Apart from populating the above sheets, the script performs the following tasks:
 - [x] Remove eslint (I hate it. I hate the fact that I thought it would be better)
 - [x] Be cool
 - [x] Create issues for all of these so they're linked here
-- [ ] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
+- [x] Maybe format into folders so we have a little bit of a better structure within the code. This only makes sense if it's getting a bit too complex. So will not yet.
 
 ## Issues
 
