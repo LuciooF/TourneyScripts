@@ -30,3 +30,4 @@
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
 - [ ] [Write a well-documented readme.](https://github.com/LuciooF/Tourney2024Scripts/issues/6){6} 
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 
+- [ ] [Make sure making this repo is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
