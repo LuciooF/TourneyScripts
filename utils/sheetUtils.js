@@ -62,15 +62,7 @@ function appendValueToCell(sheet, value, cell, fontSize, isBold) {
   if (fontSize) cellRange.setFontSize(fontSize);   
   if (isBold) cellRange.setFontWeight(FONTS.BOLD);
 }
-/**
- * Normalizes an order number by removing non-digit characters from the start.
- * @function normalizeOrderNumber
- * @param {string} orderNumber - The order number to normalize.
- * @returns {string} The normalized order number.
- */
-function normalizeOrderNumber(orderNumber) {
-  return String(orderNumber).replace(/^[^\d]+/, '');
-}
+
 /**
  * Extracts necessary values from a CSV row based on specific indices.
  * @function extractCsvValues

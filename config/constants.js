@@ -101,3 +101,6 @@ const STATUS_MESSAGES = Object.freeze({
 const FONTS = Object.freeze({
     BOLD: "bold",
 });
+const GENERAL_STRINGS = Object.freeze({
+    TOTAL_COUNT: "Total Count: ",
+});

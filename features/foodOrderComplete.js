@@ -8,6 +8,6 @@ function populateFoodOrderComplete(foodFormData) {
     setTaskToProcessing(STATUS_MESSAGES.POPULATING_FOOD_ORDER_COMPLETE_SHEET, getActualSheetUrl(SHEETS.FOOD_ORDER_COMPLETE));
     writeDataToSheet(SHEETS.FOOD_ORDER_COMPLETE, foodFormData, HEADERS.FOOD_ORDER_COMPLETE);
     applyAlternatingRowStyles(SHEETS.FOOD_ORDER_COMPLETE);
-    appendValueToCell(SHEETS.FOOD_ORDER_COMPLETE, "Total Count" + foodFormData.length, "P1", 16, true);
+    appendValueToCell(SHEETS.FOOD_ORDER_COMPLETE, GENERAL_STRINGS.TOTAL_COUNT + foodFormData.length, "P1", 16, true);
     setLastTaskToDone();
 }
