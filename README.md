@@ -92,5 +92,6 @@ Apart from populating the above sheets, the script performs the following tasks:
 - [x] [Implement async functions to make asyncronous and faster, especially the club spreadsheets](https://github.com/LuciooF/Tourney2024Scripts/issues/18){18} 
 - [x] [Formalize Food Form data as it is currently bad.](https://github.com/LuciooF/Tourney2024Scripts/issues/19){19} 
 - [x] [Make sure making this repo public is secure and im not sharing anything I should't](https://github.com/LuciooF/Tourney2024Scripts/issues/20){20} 
+- [x] [Create folders to make it a bit easier on the eye](https://github.com/LuciooF/Tourney2024Scripts/issues/21){21} 
 - [ ] [Food Form/Requirements work](https://github.com/LuciooF/Tourney2024Scripts/issues/4){4} 
 - [ ] [Add duplicate peoples name to error sheet](https://github.com/LuciooF/Tourney2024Scripts/issues/14){14} 

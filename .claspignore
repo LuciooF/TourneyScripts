@@ -1,6 +1,0 @@
-# Ignore all hidden files
-.*
-
-# Ignore readme
-README.md
-update-readme.mjs
